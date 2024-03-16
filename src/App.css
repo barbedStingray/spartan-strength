@@ -3,3 +3,53 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Root Here */
+
+/* APP DIV */
+.spartanStrength {
+  border: 2px solid orangered;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+/* TIMER CSS */
+.circleContainer {
+  border: 2px solid black;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  /* height: 70vh; */
+
+  display: flex;
+  flex: 10;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
+  /* background-image: linear-gradient(#0000ff, #00008b, #87ceeb); */
+}
+.circle {
+  /* border: 2px solid blue; */
+  border-radius: 50%;
+  fill: none;
+  /* stroke: url(#gradientColor); */
+  stroke-width: 10px;
+  /* ! drop shadow causing weird lag blackness around div square */
+  /* filter: drop-shadow(6px 6px 15px #000000); */
+  overflow: none;
+}
+.count {
+  /* border: 2px solid green; */
+  position: absolute;
+  /* center an absolute div in a relative one */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* * Big bucks */
+  font-size: 20vh;
+}

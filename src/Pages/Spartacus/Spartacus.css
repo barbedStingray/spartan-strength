@@ -1,0 +1,54 @@
+.spartacusWorkout {
+    border: 2px solid pink;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    padding: 0px 10vw;
+}
+.clockTime {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    height: 80vh;
+}
+.workoutButtons{
+    border: 2px solid green;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+.workoutExercise {
+    display: flex;
+    flex: 2;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.workoutList {
+    border: 2px solid magenta;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex: 1;
+    /* padding: 5px 10px; */
+    font-size: 2.5vw;
+    /* background-color: #80808044; */
+
+}
+.exercise {
+    border-top: 1px solid black;
+    padding: 10px;
+}
+.exerciseComplete {
+    background-color: #ff000044;
+    text-decoration: line-through;
+}
+
