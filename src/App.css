@@ -4,12 +4,25 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: roman;
+  src: url('./fonts/roman.otf');
+}
+@font-face {
+  font-family: ocean;
+  src: url('./fonts/oceanRush.otf');
+}
 /* Root Here */
 :root {
   background-image: url('./Photos/Gannicus.jpeg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  /* font decorations */
+  color: #f5d716;
+  font-weight: 1000;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
 /* APP DIV */
@@ -19,6 +32,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: ocean;
+
 }
 
 /* buttons */
