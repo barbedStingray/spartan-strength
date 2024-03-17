@@ -74,7 +74,7 @@ const Stopwatch = () => {
                 {laps.length === 0 ? null :
                     laps.map((lap, i) => (
                         <div className='lap' key={i}>
-                            <p>Lap: {i + 1}: {lap.hours}h {lap.minutes}m {lap.seconds}s</p>
+                            <p>Lap {i + 1}: {lap.hours}h {lap.minutes}m {lap.seconds}s</p>
                             <div onClick={() => deleteLap(i, laps)} className='deleteButton'>X</div>
                         </div>
                     ))

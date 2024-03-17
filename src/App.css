@@ -20,9 +20,9 @@
   background-size: cover;
 
   /* font decorations */
-  color: #f5d716;
-  font-weight: 1000;
-  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  color: #ffd014;
+  /* shadows in all (4) directions */
+  text-shadow: -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000;
 }
 
 /* APP DIV */
@@ -33,7 +33,6 @@
   display: flex;
   flex-direction: column;
   font-family: ocean;
-
 }
 
 /* buttons */
@@ -42,11 +41,17 @@
   border-radius: 5px;
   padding: 5px;
   width: 20vh;
-  font-size: 4vh;
+  font-size: 5vh;
   cursor: pointer;
   box-shadow: 0 0 10px black;
   text-align: center;
   transition: 0.3s;
+
+    font-family: roman;
+    text-shadow: none;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+
 }
 .clickableDiv:hover {
   background-color: #80808044;
@@ -90,4 +95,5 @@
   transform: translate(-50%, -50%);
   /* * Big bucks */
   font-size: 25vh;
+
 }

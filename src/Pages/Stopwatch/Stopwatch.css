@@ -6,7 +6,7 @@
     padding: 0px 15vw 0px 5vw;
 }
 .watchButtons {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -14,7 +14,7 @@
     margin-top: 10px;
 }
 .timeClock {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     font-size: 1rem;
     display: flex;
     justify-content: center;
@@ -26,7 +26,7 @@
     margin-top: 20px;
 }
 .lapLog {
-    border: 2px solid magenta;
+    /* border: 2px solid magenta; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -35,18 +35,27 @@
     height: 30vh;
     overflow: scroll;
     margin-top: 20px;
+
+    font-family: roman;
+    text-shadow: none;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+
 }
 .lap {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
-    width: 70vw;
+    width: 75%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-size: 5vw;
+    font-size: 4vw;
+    color: rgb(254, 127, 36);
+    padding: 10px 0px;
 }
 .deleteButton {
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    box-shadow: 0 0 5px black;
     border-radius: 10px;
     cursor: pointer;
     width: 25%;

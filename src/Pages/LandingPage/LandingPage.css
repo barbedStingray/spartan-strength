@@ -1,0 +1,9 @@
+
+.landingPage {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15vw 0px 5vw;
+}

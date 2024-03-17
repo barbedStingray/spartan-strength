@@ -11,7 +11,7 @@
     /* border: 2px solid gold; */
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 70%;
     /* flex: 3; */
     height: 80vh;
 }
@@ -44,10 +44,17 @@
     /* justify-content: space-around; */
     align-items: center;
     /* flex: 1; */
-    padding: 15px 0px;
-    font-size: 2.5vw;
+    padding: 15px 2px;
     overflow: scroll;
-    /* background-color: #80808044; */
+
+    width: 30%;
+
+    font-size: 3.5vw;
+    font-family: roman;
+    text-shadow: none;
+    -webkit-text-stroke: 0.3px;
+    -webkit-text-stroke-color: black;
+    background-color: #fefefe44;
 }
 .exercise {
     /* border-top: 1px solid black; */
@@ -56,10 +63,12 @@
     /* padding: 5px 5px; */
     padding-top: 1vh;
     text-align: center;
+    color: skyblue;
 }
 .exerciseComplete {
-    background-color: #ff000044;
     text-decoration: line-through;
+    text-decoration-color: black;
+    color: darkred;
 }
 
 /* media query for phone */
