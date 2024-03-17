@@ -5,6 +5,12 @@
 }
 
 /* Root Here */
+:root {
+  background-image: url('./Photos/Gannicus.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 /* APP DIV */
 .spartanStrength {
@@ -15,19 +21,36 @@
   flex-direction: column;
 }
 
+/* buttons */
+.clickableDiv {
+  /* border: 2px solid red; */
+  border-radius: 5px;
+  padding: 5px;
+  width: 20vh;
+  font-size: 4vh;
+  cursor: pointer;
+  box-shadow: 0 0 10px black;
+  text-align: center;
+  transition: 0.3s;
+}
+.clickableDiv:hover {
+  background-color: #80808044;
+}
+
 
 
 
 /* TIMER CSS */
 .circleContainer {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   position: relative;
   height: 100%;
   width: 100%;
   /* height: 70vh; */
 
   display: flex;
-  flex: 10;
+  /* flex: 10; */
+  height: 65%;
   flex-direction: row;
   justify-content: center;
   /* align-items: center; */
@@ -46,10 +69,10 @@
 .count {
   /* border: 2px solid green; */
   position: absolute;
-  /* center an absolute div in a relative one */
+  /* * center an absolute div in a relative one */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* * Big bucks */
-  font-size: 20vh;
+  font-size: 25vh;
 }

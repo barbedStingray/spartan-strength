@@ -4,7 +4,7 @@ import './App.css';
 
 // import useInterval from './Components/useInterval';
 import LandingPage from './Pages/LandingPage';
-import StopWatch from './Pages/Stopwatch';
+import StopWatch from './Pages/Stopwatch/Stopwatch';
 import Spartacus from './Pages/Spartacus/Spartacus';
 import FourOhFour from './Pages/FourOhFour';
 import Header from './Components/Header';

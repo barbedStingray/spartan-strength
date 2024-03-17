@@ -1,0 +1,59 @@
+.stopWatch {
+    border: 2px solid green;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0px 15vw 0px 5vw;
+}
+.watchButtons {
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6vw;
+    margin-top: 10px;
+}
+.timeClock {
+    border: 2px solid red;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 6vw;
+    height: 20vw;
+    font-size: 7vw;
+    margin-top: 20px;
+}
+.lapLog {
+    border: 2px solid magenta;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    height: 30vh;
+    overflow: scroll;
+    margin-top: 20px;
+}
+.lap {
+    border: 2px solid red;
+    display: flex;
+    width: 70vw;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 5vw;
+}
+.deleteButton {
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 25%;
+    text-align: center;
+
+    transition: 0.3s;
+}
+.deleteButton:hover {
+    background-color: #80808044;
+}

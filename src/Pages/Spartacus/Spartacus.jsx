@@ -4,11 +4,14 @@ import './Spartacus.css';
 
 import useInterval from '../../Components/useInterval';
 
+import sound1 from '../../audio/beep-07a.wav';
+import sound0 from '../../audio/beep-09.wav';
+
+
 const Spartacus = () => {
 
   // classic spartacus exercise list
   const spartacusWorkout = [
-    // 'Warm Up',
     'Goblet Squats',
     'Mtn. Climbers',
     'Kettle Swings',
@@ -28,8 +31,8 @@ const Spartacus = () => {
   const [circleTime, setCircleTime] = useState(0); // sets total circle time for timer
 
   const [rest, setRest] = useState(true);
-  const [workTime, setWorkTime] = useState(3); // workout time 60s
-  const [restTime, setRestTime] = useState(5); // rest time 15s
+  const [workTime, setWorkTime] = useState(60); // workout time 60s
+  const [restTime, setRestTime] = useState(15); // rest time 15s
   const [buttonToggle, setButtonToggle] = useState(false); // button display
 
   // circle gradient colors
@@ -40,14 +43,21 @@ const Spartacus = () => {
   const blueTwo = '#0000ff';
   const blueThree = '#87ceeb';
 
+  function playAudioZero() {
+    new Audio(sound0).play();
+  }
+  function playAudioOne() {
+    new Audio(sound1).play();
+  }
+
 
 
   useInterval(
     () => {
       if (position === spartacusWorkout.length && rest === false) {
         console.log(`workout complete`);
+        // todo * navigate to workout complete page
         setRunTime(false);
-        // setCount('WorkoutComplete');
       }
       else if (checkCount(count) === true && rest === false) {
         console.log(`rest time!`);
@@ -55,6 +65,7 @@ const Spartacus = () => {
         setCount(restTime);
         setPosition(position + 1);
         setCircleTime(restTime);
+        playAudioZero();
       }
       else if (checkCount(count) === true && rest === true) {
         console.log(`work time!`);
@@ -62,6 +73,11 @@ const Spartacus = () => {
         setRest(!rest);
         setCount(workTime);
         setCircleTime(workTime);
+        playAudioZero();
+      }
+      else if (count === 3 || count === 2 || count === 1) {
+        setCount(count - 1);
+        playAudioOne();
       }
       else {
         setCount(count - 1);
@@ -97,8 +113,6 @@ const Spartacus = () => {
     setButtonToggle(!buttonToggle);
   }
 
-
-
   return (
     <div className="spartacusWorkout">
 
@@ -106,11 +120,11 @@ const Spartacus = () => {
         <div className='workoutButtons'>
           {buttonToggle ?
             <>
-              <button onClick={() => setRunTime(!runTime)}>{runTime ? 'Pause' : 'Start'}</button>
-              <button onClick={() => resetWorkout()}>Give Up</button>
+              <div className='clickableDiv' onClick={() => setRunTime(!runTime)}>{runTime ? 'Pause' : 'Start'}</div>
+              <div className='clickableDiv' onClick={() => resetWorkout()}>Give Up</div>
             </>
             :
-            <button onClick={() => beginWorkout()}>Begin Workout</button>
+            <div className='clickableDiv' onClick={() => beginWorkout()}><h3>Begin</h3></div>
           }
         </div>
 
