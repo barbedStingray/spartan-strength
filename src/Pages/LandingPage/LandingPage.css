@@ -2,8 +2,30 @@
 .landingPage {
     display: flex;
     flex: 1;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0px 15vw 0px 5vw;
+}
+.landingLinks {
+    border: 2px solid magenta;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5vh;
+    font-size: 10vh;
+    text-align: center;
+}
+.landLink {
+    border: 2px solid red;
+    -webkit-text-stroke-color: black;
+    width: 60vh;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.landLink:hover {
+    background-color: #ffffff77;
+}
+a {
+    text-decoration: none;
+    color: skyblue;
 }

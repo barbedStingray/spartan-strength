@@ -52,15 +52,15 @@ const Stopwatch = () => {
             <div className='timeClock'>
                 <div>
                     <p>Hour</p>
-                    <h3>{hours}</h3>
+                    <p>{hours}</p>
                 </div>
                 <div>
                     <p>Min</p>
-                    <h3>{minutes}</h3>
+                    <p>{minutes}</p>
                 </div>
                 <div>
                     <p>Sec</p>
-                    <h3>{seconds}</h3>
+                    <p>{seconds}</p>
                 </div>
             </div>
 

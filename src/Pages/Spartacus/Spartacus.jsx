@@ -124,12 +124,12 @@ const Spartacus = () => {
               <div className='clickableDiv' onClick={() => resetWorkout()}>Give Up</div>
             </>
             :
-            <div className='clickableDiv' onClick={() => beginWorkout()}><h3>Begin</h3></div>
+            <div className='clickableDiv' onClick={() => beginWorkout()}><p>Begin</p></div>
           }
         </div>
 
         <div className='circleContainer'>
-          <h4 className='count'>{count}</h4>
+          <p className='count'>{count}</p>
           <svg
             className='circle'
             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ const Spartacus = () => {
       <div className='workoutList'>
         {spartacusWorkout.map((exercise, i) => (
           <div key={i} className={position > i ? 'exercise exerciseComplete' : 'exercise'}>
-            <h5>{exercise}</h5>
+            <p>{exercise}</p>
           </div>
         ))}
       </div>

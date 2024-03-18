@@ -36,11 +36,6 @@
     overflow: scroll;
     margin-top: 20px;
 
-    font-family: roman;
-    text-shadow: none;
-    -webkit-text-stroke: 0.5px;
-    -webkit-text-stroke-color: black;
-
 }
 .lap {
     /* border: 2px solid red; */

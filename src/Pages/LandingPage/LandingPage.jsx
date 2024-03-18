@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
+import LandingLink from '../../Components/LandingLink';
+
+
 
 const LandingPage = ({ title, setTitle }) => {
 
@@ -11,32 +14,20 @@ const LandingPage = ({ title, setTitle }) => {
 
   // pathways for navigation component
   const titles = [
-    'Welcome',
-
+    { path: '/stopwatch', name: 'StopWatch' },
+    { path: '/spartacus', name: 'Spartacus' },
+    { path: '/custom', name: 'Custom' }
   ];
 
 
   return (
     <div className='landingPage'>
 
-      <Link to='/stopwatch'>
-        <div onClick={() => setTitle('StopWatch')}>
-          Stopwatch
-        </div>
-      </Link>
-
-      <Link to='/spartacus'>
-        <div onClick={() => setTitle('Classic Workout')}>
-          Spartacus Workout
-        </div>
-      </Link>
-
-      <Link to='/custom'>
-        <div onClick={() => setTitle('Custom Workout')}>
-          Custom Workout
-        </div>
-      </Link>
-
+      <div className='landingLinks'>
+        {titles.map((item) => (
+          <LandingLink setTitle={setTitle} path={item.path} name={item.name} />
+        ))}
+      </div>
 
     </div>
   )
