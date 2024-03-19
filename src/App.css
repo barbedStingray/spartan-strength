@@ -19,13 +19,18 @@
   background-position: center;
   background-size: cover;
 
+  --color-red: #dc0000;
+  --color-blue: #63d3ff;
+  --color-yellow: #ffd014;
+  --color-white: #ffffff66;
+
   /* font decorations */
-  color: #ffd014;
+  color: var(--color-yellow);
 }
 
 /* APP DIV */
 .spartanStrength {
-  border: 2px solid orangered;
+  /* border: 2px solid orangered; */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -47,6 +52,7 @@
   font-size: 5vh;
   cursor: pointer;
   box-shadow: 0 0 10px black;
+
   text-align: center;
   transition: 0.3s;
 
@@ -54,10 +60,11 @@
     text-shadow: none;
     -webkit-text-stroke: 0.5px;
     -webkit-text-stroke-color: black;
+    color: var(--color-blue);
 
 }
 .clickableDiv:hover {
-  background-color: #80808044;
+  background-color: var(--color-white);
 }
 
 
@@ -84,7 +91,7 @@
 
 }
 .circle {
-  /* border: 2px solid blue; */
+  /* border: 2px solid #dc4545; */
   border-radius: 50%;
   fill: none;
   /* stroke: url(#gradientColor); */

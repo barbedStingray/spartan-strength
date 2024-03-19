@@ -7,7 +7,7 @@
     padding: 0px 15vw 0px 5vw;
 }
 .landingLinks {
-    border: 2px solid magenta;
+    /* border: 2px solid magenta; */
     display: flex;
     flex-direction: column;
     gap: 2.5vh;
@@ -15,7 +15,7 @@
     text-align: center;
 }
 .landLink {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     -webkit-text-stroke-color: black;
     width: 60vh;
     padding: 10px;
@@ -23,9 +23,10 @@
     transition: 0.3s;
 }
 .landLink:hover {
-    background-color: #ffffff77;
+    background-color: var(--color-white);
+    /* box-shadow: 0 0 5px #fff; */
 }
 a {
     text-decoration: none;
-    color: skyblue;
+    color: var(--color-blue);
 }

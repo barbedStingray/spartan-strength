@@ -1,0 +1,9 @@
+.customWorkout {
+    border: 2px solid blue;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}

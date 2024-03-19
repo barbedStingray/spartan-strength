@@ -4,12 +4,11 @@ import './Stopwatch.css';
 
 
 
-const Stopwatch = () => {
-
-    // run time variables
-    const [runTime, setRunTime] = useState(false);
-    const [delay] = useState(1000);
-    const [count, setCount] = useState(0);
+const Stopwatch = ({
+    runTime, setRunTime,
+    delay,
+    count, setCount
+}) => {
 
     // time clock display
     const hours = Math.floor(count / (1000 * 60 * 60));
@@ -52,11 +51,11 @@ const Stopwatch = () => {
             <div className='timeClock'>
                 <div>
                     <p>Hour</p>
-                    <p>{hours}</p>
+                    <p>{hours} :</p>
                 </div>
                 <div>
                     <p>Min</p>
-                    <p>{minutes}</p>
+                    <p>{minutes} .</p>
                 </div>
                 <div>
                     <p>Sec</p>
@@ -74,7 +73,7 @@ const Stopwatch = () => {
                 {laps.length === 0 ? null :
                     laps.map((lap, i) => (
                         <div className='lap' key={i}>
-                            <p>Lap {i + 1}: {lap.hours}h {lap.minutes}m {lap.seconds}s</p>
+                            <p>Lap {i + 1} - {lap.hours} : {lap.minutes} . {lap.seconds}</p>
                             <div onClick={() => deleteLap(i, laps)} className='deleteButton'>X</div>
                         </div>
                     ))

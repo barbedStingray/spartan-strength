@@ -1,6 +1,6 @@
 ### Welcome to Spartan Strength!
 
-SVG, custom hook, timer functions, webpage scalability,
+SVG, custom hook, timer functions, webpage scalability, beeps!
 
 
 # Stopwatch Page

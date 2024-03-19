@@ -1,9 +1,9 @@
 .spartacusWorkout {
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex: 1;
     padding: 0px 15vw 0px 5vw;
 }
@@ -13,7 +13,7 @@
     flex-direction: column;
     width: 70%;
     /* flex: 3; */
-    height: 80vh;
+    height: 76vh;
 }
 .workoutButtons{
     /* border: 2px solid green; */
@@ -44,23 +44,25 @@
 }
 .workoutList {
     /* border: 2px solid magenta; */
-    height: 80vh;
+    height: 76vh;
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
     align-items: center;
     /* flex: 1; */
-    padding: 15px 5px;
+    padding: 1vh 5px;
+    /* margin: 4vh 0; */
     overflow: scroll;
 
     width: 30%;
 
-    font-size: 3.5vw;
+    font-size: 3vw;
 
     -webkit-text-stroke: 0.4px;
     -webkit-text-stroke-color: black;
 
-    background-color: #fefefe44;
+    background-color: var(--color-white);
+    border-radius: 10px;
 }
 .exercise {
     /* border-top: 1px solid black; */
@@ -69,12 +71,17 @@
     /* padding: 5px 5px; */
     padding-top: 1vh;
     text-align: center;
-    color: skyblue;
+    color: var(--color-blue);
+
 }
 .exerciseComplete {
     text-decoration: line-through;
     text-decoration-color: black;
-    color: darkred;
+    color: var(--color-red);
+}
+
+.red {
+    color: var(--color-red);
 }
 
 /* media query for phone */

@@ -1,47 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './Spartacus.css';
 
 import useInterval from '../../Components/useInterval';
+import Clock from '../../Components/Clock';
+import WorkoutList from '../../Components/WorkoutList';
 
 import sound1 from '../../audio/beep-07a.wav';
 import sound0 from '../../audio/beep-09.wav';
 
 
-const Spartacus = () => {
+const Spartacus = (
+  { runTime, setRunTime,
+    position, setPosition,
+    delay,
+    count, setCount,
+    circleTime, setCircleTime,
+    rest, setRest,
+    workTime, setWorkTime,
+    restTime, setRestTime,
+    buttonToggle, setButtonToggle,
+    spartacusWorkout
+  }) => {
 
-  // classic spartacus exercise list
-  const spartacusWorkout = [
-    'Goblet Squats',
-    'Mtn. Climbers',
-    'Kettle Swings',
-    'T Push Ups',
-    'Jumping Lunges',
-    'Rows',
-    'Side Lunges',
-    'Renegade Rows',
-    'Lunge Twists',
-    'Military Press',
-  ];
+  const navigate = useNavigate();
 
-  const [runTime, setRunTime] = useState(false);
-  const [position, setPosition] = useState(0); // position within the workout
-  const [delay] = useState(1000); // delay triggers useEffect
-  const [count, setCount] = useState(0); // universal counter
-  const [circleTime, setCircleTime] = useState(0); // sets total circle time for timer
-
-  const [rest, setRest] = useState(true);
-  const [workTime, setWorkTime] = useState(60); // workout time 60s
-  const [restTime, setRestTime] = useState(15); // rest time 15s
-  const [buttonToggle, setButtonToggle] = useState(false); // button display
-
-  // circle gradient colors
-  const redOne = '#460101';
-  const redTwo = '#8b0000';
-  const redThree = '#ffc0cb';
-  const blueOne = '#00008b';
-  const blueTwo = '#0000ff';
-  const blueThree = '#87ceeb';
 
   function playAudioZero() {
     new Audio(sound0).play();
@@ -50,14 +34,13 @@ const Spartacus = () => {
     new Audio(sound1).play();
   }
 
-
-
   useInterval(
     () => {
       if (position === spartacusWorkout.length && rest === false) {
         console.log(`workout complete`);
-        // todo * navigate to workout complete page
+        // ?? * navigate to workout complete page
         setRunTime(false);
+        navigate('/workoutComplete');
       }
       else if (checkCount(count) === true && rest === false) {
         console.log(`rest time!`);
@@ -113,73 +96,33 @@ const Spartacus = () => {
     setButtonToggle(!buttonToggle);
   }
 
+
+
   return (
     <div className="spartacusWorkout">
 
       <div className='clockTime'>
+
         <div className='workoutButtons'>
           {buttonToggle ?
             <>
               <div className='clickableDiv' onClick={() => setRunTime(!runTime)}>{runTime ? 'Pause' : 'Start'}</div>
-              <div className='clickableDiv' onClick={() => resetWorkout()}>Give Up</div>
+              <div className='clickableDiv red' onClick={() => resetWorkout()}>Missio</div>
             </>
             :
             <div className='clickableDiv' onClick={() => beginWorkout()}><p>Begin</p></div>
           }
         </div>
 
-        <div className='circleContainer'>
-          <p className='count'>{count}</p>
-          <svg
-            className='circle'
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 122.88 122.88"
-            // x="0px" y="0px"
-            fill={'green'}
-            strokeLinecap='round'
-          >
-            <defs>
-              <linearGradient id='gradientColor' gradientTransform='rotate(90)'>
-                <stop offset='0%'
-                  stopColor={rest ? blueOne : redOne} />
-                <stop offset='60%'
-                  stopColor={rest ? blueTwo : redTwo} />
-                <stop offset='100%'
-                  stopColor={rest ? blueThree : redThree} />
-              </linearGradient>
-            </defs>
+        <Clock count={count} rest={rest} circleTime={circleTime} />
 
-            <circle
-              cx="61.44"
-              cy="61.44"
-              r="55"
-              // 2pir circumference of a circle based on Radius (r) 2pi(55) = 345.6
-              fill="none"
-              stroke="url(#gradientColor)"
-              strokeDasharray="345.6"
-              // possible switch statement? 
-              strokeDashoffset={(345.6 * (circleTime - count)) / circleTime} // Adjust according to your countdown
-              transform="rotate(-90 61.44 61.44)"
-            />
-            <path
-              d="M61.438,0c33.93,0,61.441,27.512,61.441,61.441 c0,33.929-27.512,61.438-61.441,61.438C27.512,122.88,0,95.37,0,61.441C0,27.512,27.512,0,61.438,0L61.438,0z"
-            >
-            </path>
-          </svg>
-        </div>
 
         <div className='workoutExercise'>
           <p>{rest ? `Next: ${spartacusWorkout[position]}` : `${spartacusWorkout[position]}`}</p>
         </div>
       </div>
 
-      <div className='workoutList'>
-        {spartacusWorkout.map((exercise, i) => (
-          <div key={i} className={position > i ? 'exercise exerciseComplete' : 'exercise'}>
-            <p>{exercise}</p>
-          </div>
-        ))}
-      </div>
+      <WorkoutList workout={spartacusWorkout} position={position} />
 
 
     </div>
