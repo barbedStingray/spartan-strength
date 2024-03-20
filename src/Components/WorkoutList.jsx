@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const WorkoutList = ({
   workout, position,
@@ -6,9 +6,8 @@ const WorkoutList = ({
   customWorkout
 }) => {
 
-
   function deleteExercise(spot, array) {
-    const newArray = [...array]; // copy original array
+    const newArray = [...array];
     newArray.splice(spot, 1);
     setCustomWorkout(newArray);
   }

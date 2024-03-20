@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
-
 import './Spartacus.css';
 
 import useInterval from '../../Components/useInterval';
@@ -10,7 +9,6 @@ import WorkoutList from '../../Components/WorkoutList';
 
 import sound1 from '../../audio/beep-07a.wav';
 import sound0 from '../../audio/beep-09.wav';
-
 
 
 const Spartacus = (
@@ -23,7 +21,7 @@ const Spartacus = (
     workTime, restTime,
     buttonToggle, setButtonToggle,
     customEdit,
-    spartacusWorkout, customWorkout, setCustomWorkout,
+    customWorkout, setCustomWorkout,
     resetWorkout, setTitle
   }) => {
 
@@ -40,15 +38,11 @@ const Spartacus = (
   useInterval(
     () => {
       if (position === exerciseList.length && rest === false) {
-        console.log(`workout complete`);
-        // ?? * navigate to workout complete page
-        // setRunTime(false);
         resetWorkout();
         setTitle('Victory');
         navigate('/workoutComplete');
       }
       else if (checkCount(count) === true && rest === false) {
-        console.log(`rest time!`);
         setRest(!rest);
         setCount(restTime);
         setPosition(position + 1);
@@ -56,8 +50,6 @@ const Spartacus = (
         playAudioZero();
       }
       else if (checkCount(count) === true && rest === true) {
-        console.log(`work time!`);
-        console.log('position', position);
         setRest(!rest);
         setCount(workTime);
         setCircleTime(workTime);
@@ -84,7 +76,7 @@ const Spartacus = (
   function beginWorkout() {
     setCount(10);
     setCircleTime(10);
-    setRunTime(!runTime); // begins timer
+    setRunTime(!runTime);
     setButtonToggle(!buttonToggle);
   }
 

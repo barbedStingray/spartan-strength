@@ -1,17 +1,15 @@
 import React from 'react';
-import './WorkoutComplete.css';
-import LandingLink from '../../Components/LandingLink';
 import { motion as m } from 'framer-motion';
+import './WorkoutComplete.css';
+
+import LandingLink from '../../Components/LandingLink';
 
 const WorkoutComplete = ({ setTitle, resetWorkout }) => {
-
-  // setTitle('Victory');
 
   const options = [
     { path: '/', name: 'Welcome' },
     { path: '/spartacus', name: 'Repeat Glory' }
   ];
-
 
   return (
     <m.div 

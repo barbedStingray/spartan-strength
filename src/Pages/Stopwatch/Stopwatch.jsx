@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion as m } from 'framer-motion';
-import useInterval from '../../Components/useInterval';
 import './Stopwatch.css';
 
+import useInterval from '../../Components/useInterval';
 
 
 const Stopwatch = ({
@@ -27,7 +27,7 @@ const Stopwatch = ({
         setLaps([...laps, theLap]);
     }
     function deleteLap(spot, array) {
-        const newArray = [...array]; // copy original array
+        const newArray = [...array];
         newArray.splice(spot, 1);
         setLaps(newArray);
     }

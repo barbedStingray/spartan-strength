@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import './App.css';
+import { useLocation, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import './App.css';
 
-// import useInterval from './Components/useInterval';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import StopWatch from './Pages/Stopwatch/Stopwatch';
 import Spartacus from './Pages/Spartacus/Spartacus';
-import FourOhFour from './Pages/FourOhFour';
+import CustomWork from './Pages/CustomWork/CustomWork';
+import WorkoutComplete from './Pages/WorkoutComplete/WorkoutComplete';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-import WorkoutComplete from './Pages/WorkoutComplete/WorkoutComplete';
-import CustomWork from './Pages/CustomWork/CustomWork';
+import FourOhFour from './Pages/FourOhFour';
 
-import { Routes, Route, Link } from 'react-router-dom';
+
 
 function App() {
 
   const location = useLocation();
 
   const [title, setTitle] = useState('Welcome!');
-
   const [spartacusWorkout, setSpartacusWorkout] = useState([
     'Goblet Squats',
     'Mtn. Climbers',
@@ -32,12 +30,10 @@ function App() {
     'Renegade Rows',
     'Lunge Twists',
     'Military Press',
-  ]);
-  const [customWorkout, setCustomWorkout] = useState([]);
-  const [exerciseList, setExerciseList] = useState([]);
-
-  // workout states
-  const [runTime, setRunTime] = useState(false);
+  ]); // saved spartacus workout
+  const [customWorkout, setCustomWorkout] = useState([]); // saved custom workout
+  const [exerciseList, setExerciseList] = useState([]); // master list for components
+  const [runTime, setRunTime] = useState(false); // starts/stops timer
   const [delay] = useState(1000); // delay triggers useEffect 
   const [position, setPosition] = useState(0); // position within the workout
   const [count, setCount] = useState(0); // universal counter
@@ -46,8 +42,7 @@ function App() {
   const [workTime, setWorkTime] = useState(60); // workout time 60s
   const [restTime, setRestTime] = useState(15); // rest time 15s
   const [buttonToggle, setButtonToggle] = useState(false); // button display
-  const [customEdit, setCustomEdit] = useState(false);
-
+  const [customEdit, setCustomEdit] = useState(false); // allows delete in workout list
 
   function resetWorkout() {
     // reset your variables back to base mode
@@ -65,13 +60,12 @@ function App() {
 
       <Header title={title} setTitle={setTitle} />
 
-
       <AnimatePresence
         mode='wait'
-        // initial={false}
+      // initial={false}
       >
         {/* really important for unmounting/mounting tracking */}
-        <Routes location={location} key={location.pathname}> 
+        <Routes location={location} key={location.pathname}>
           <Route path='/'
             element={
               <LandingPage

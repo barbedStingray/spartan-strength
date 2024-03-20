@@ -1,8 +1,7 @@
 import React from 'react'
-import './header.css';
 import { Link } from 'react-router-dom';
-
 import { GiSpartan } from "react-icons/gi";
+import './header.css';
 
 
 const Header = ({ title, setTitle }) => {

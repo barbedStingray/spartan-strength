@@ -68,6 +68,7 @@
 .setCustom {
     /* border: 2px solid orange; */
     width: 40vh;
+    color: var(--color-red);
 }
 .inputButton:hover {
     background-color: var(--color-white);

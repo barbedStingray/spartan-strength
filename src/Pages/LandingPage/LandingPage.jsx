@@ -1,9 +1,8 @@
 import React from 'react';
-import './LandingPage.css';
 import { motion as m } from 'framer-motion';
+import './LandingPage.css';
 
 import LandingLink from '../../Components/LandingLink';
-
 
 
 const LandingPage = ({ 
@@ -15,14 +14,12 @@ const LandingPage = ({
   resetWorkout
 }) => {
 
-
   // pathways for navigation component
   const titles = [
     { path: '/stopwatch', name: 'StopWatch' },
     { path: '/spartacus', name: 'Spartacus' },
     { path: '/custom', name: 'Custom' }
   ];
-
 
   return (
     <m.div 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './CustomWork.css';
+
 import WorkoutList from '../../Components/WorkoutList';
-import { useNavigate } from 'react-router-dom';
 import CustomInput from '../../Components/CustomInput';
 
 const CustomWork = ({
@@ -29,10 +30,16 @@ const CustomWork = ({
         setExercise('');
     }
     function beginCustomWorkout() {
-        resetWorkout();
-        setExerciseList(customWorkout);
-        setCustomEdit(false);
-        navigate('/spartacus');
+        if (workTime > 0 && restTime > 0) {
+            resetWorkout();
+            setExerciseList(customWorkout);
+            setCustomEdit(false);
+            navigate('/spartacus');
+            return
+        }
+        else {
+            alert(`Enter Number Values for Rest and Work`);
+        }
     }
 
 

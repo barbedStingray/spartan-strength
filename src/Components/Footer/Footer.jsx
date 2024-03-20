@@ -1,5 +1,6 @@
 import React from 'react';
 import './footer.css';
+
 import Stingray from '../../Photos/DRedIcon.png';
 
 const Footer = () => {
