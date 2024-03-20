@@ -14,9 +14,7 @@ const Stopwatch = ({
     const hours = Math.floor(count / (1000 * 60 * 60));
     const minutes = Math.floor((count % (1000 * 60 * 60)) / (1000 * 60) * 1000);
     const seconds = Math.floor(count % 60);
-
     const [laps, setLaps] = useState([]);
-    console.log('laps', laps);
 
     function timerReset() {
         setCount(0);
@@ -24,18 +22,12 @@ const Stopwatch = ({
         setRunTime(false);
     }
     function addLap() {
-        // console.log(`adding a lap`, seconds, minutes, hours);
         const theLap = { seconds, minutes, hours }
         setLaps([...laps, theLap]);
-        console.log('LAPS', laps);
     }
-
     function deleteLap(spot, array) {
-        console.log('spot', spot);
-        console.log('array', array);
         const newArray = [...array]; // copy original array
         newArray.splice(spot, 1);
-        console.log(`newArray`, newArray);
         setLaps(newArray);
     }
 

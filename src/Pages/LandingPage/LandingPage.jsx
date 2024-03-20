@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import './LandingPage.css';
 
 import LandingLink from '../../Components/LandingLink';
 
 
 
-const LandingPage = ({ title, setTitle }) => {
+const LandingPage = ({ 
+  setTitle,
+  spartacusWorkout, customWorkout,
+  setExerciseList,
+  setRestTime, setWorkTime,
+  setCustomEdit,
+  resetWorkout
+}) => {
 
-  function setTitleHeader() {
-    console.log('setting Header');
-  }
 
   // pathways for navigation component
   const titles = [
@@ -24,8 +27,16 @@ const LandingPage = ({ title, setTitle }) => {
     <div className='landingPage'>
 
       <div className='landingLinks'>
-        {titles.map((item) => (
-          <LandingLink setTitle={setTitle} path={item.path} name={item.name} />
+        {titles.map((item, i) => (
+          <LandingLink 
+            key={i}
+            setExerciseList={setExerciseList}
+            setTitle={setTitle} path={item.path} name={item.name} 
+            spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
+            setWorkTime={setWorkTime} setRestTime={setRestTime}
+            setCustomEdit={setCustomEdit}
+            resetWorkout={resetWorkout}
+          />
         ))}
       </div>
 

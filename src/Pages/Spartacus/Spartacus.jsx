@@ -11,17 +11,19 @@ import sound1 from '../../audio/beep-07a.wav';
 import sound0 from '../../audio/beep-09.wav';
 
 
+
 const Spartacus = (
-  { runTime, setRunTime,
+  { exerciseList,
+    runTime, setRunTime,
     position, setPosition,
-    delay,
-    count, setCount,
+    delay, count, setCount,
     circleTime, setCircleTime,
     rest, setRest,
-    workTime, setWorkTime,
-    restTime, setRestTime,
+    workTime, restTime,
     buttonToggle, setButtonToggle,
-    spartacusWorkout
+    customEdit,
+    spartacusWorkout, customWorkout, setCustomWorkout,
+    resetWorkout, setTitle
   }) => {
 
   const navigate = useNavigate();
@@ -36,10 +38,12 @@ const Spartacus = (
 
   useInterval(
     () => {
-      if (position === spartacusWorkout.length && rest === false) {
+      if (position === exerciseList.length && rest === false) {
         console.log(`workout complete`);
         // ?? * navigate to workout complete page
-        setRunTime(false);
+        // setRunTime(false);
+        resetWorkout();
+        setTitle('Victory');
         navigate('/workoutComplete');
       }
       else if (checkCount(count) === true && rest === false) {
@@ -69,7 +73,6 @@ const Spartacus = (
 
   // used to check for 0 and switch work/rest
   function checkCount(checking) {
-    console.log(`checking the count`, checking);
     if (checking === 0) {
       return true;
     }
@@ -77,18 +80,6 @@ const Spartacus = (
       return false;
     }
   }
-
-  function resetWorkout() {
-    console.log(`resetting classic spartacus`);
-    // reset your variables back to base mode
-    setRunTime(false);
-    setButtonToggle(!buttonToggle);
-    setPosition(0);
-    setCount(0);
-    setRest(true);
-    setCircleTime(0); // match the count
-  }
-
   function beginWorkout() {
     setCount(10);
     setCircleTime(10);
@@ -96,6 +87,20 @@ const Spartacus = (
     setButtonToggle(!buttonToggle);
   }
 
+  function exerciseDisplay() {
+    if (runTime === false) {
+      return <p>Prepare Yourself</p>
+    }
+    else if (position < exerciseList.length) {
+      return <p>{rest ? `Next: ${exerciseList[position]}` : `${exerciseList[position]}`}</p>
+    }
+    else if (position === exerciseList.length) {
+      return <p>Workout Complete</p>
+    }
+    else {
+      console.log('something weird happened');
+    }
+  }
 
 
   return (
@@ -116,14 +121,12 @@ const Spartacus = (
 
         <Clock count={count} rest={rest} circleTime={circleTime} />
 
-
         <div className='workoutExercise'>
-          <p>{rest ? `Next: ${spartacusWorkout[position]}` : `${spartacusWorkout[position]}`}</p>
+          {exerciseDisplay()}
         </div>
       </div>
 
-      <WorkoutList workout={spartacusWorkout} position={position} />
-
+      <WorkoutList workout={exerciseList} position={position} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} />
 
     </div>
   )
