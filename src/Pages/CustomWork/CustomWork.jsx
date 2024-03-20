@@ -46,7 +46,7 @@ const CustomWork = ({
 
     return (
         <m.div
-            className='spartacusWorkout'
+            className='customWork'
             key={'/custom'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

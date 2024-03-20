@@ -1,10 +1,11 @@
-.customWorkout {
-    border: 2px solid blue;
+.customWork {
+    /* border: 2px solid pink; */
     display: flex;
-    flex: 1;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
+    flex: 1;
+    padding: 0px 15vw 0px 5vw;
     
 }
 .customInputContainer {
@@ -72,5 +73,50 @@
 }
 .inputButton:hover {
     background-color: var(--color-white);
+  }
+
+
+
+
+
+  @media (max-width: 390px) {
+    .customWork {
+        padding: 0px 5vw 0px 5vw;
+        align-items: flex-start;
+    }
+    .customInputContainer {
+        margin-top: 2vh;
+    }
+    .workoutList {
+        margin-top: 4vh;
+        max-height: 55vh;
+        gap: 0.75vh;
+        font-size: 3.25vw;    
+    }
+    .customControl {
+        /* border: 2px solid red; */
+        margin: 6vw 0;
+        gap: 3vh;
+    }
+    .inputBoxes {
+        /* border: 2px solid green; */
+        font-size: 4.5vh;
+        gap: 3vh;
+    }
+    .inputBox {
+        font-size: 3.5vh;
+    }
+    .inputButton, .setCustom {
+        width: 100%;
+        font-size: 3.5vh;
+    }
+    .setCustom {
+        width: 90%;
+        color: var(--color-red);
+    }
+    .inputButton:hover {
+        background-color: var(--color-white);
+      }
+    
   }
   
