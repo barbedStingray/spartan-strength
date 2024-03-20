@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion as m } from 'framer-motion';
 import './CustomWork.css';
 import WorkoutList from '../../Components/WorkoutList';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +20,7 @@ const CustomWork = ({
     const inputBoxes = [
         { value: workTime, ability: setWorkTime, type: 'number', name: 'Work Time' },
         { value: restTime, ability: setRestTime, type: 'number', name: 'Rest Time' },
-        { value: exercise, ability: setExercise, type: 'text', name: 'Add New Exercise' }
+        { value: exercise, ability: setExercise, type: 'text', name: 'Exercise' }
     ];
 
 
@@ -37,27 +38,37 @@ const CustomWork = ({
 
 
     return (
-        <div className='spartacusWorkout'>
+        <m.div
+            className='spartacusWorkout'
+            key={'/custom'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+        >
 
-            <div className='clockTime'>
+            <div className='customInputContainer'>
 
-                {inputBoxes.map((box, i) => (
-                    <div key={i} className='customInput'>
-                        <CustomInput value={box.value} ability={box.ability} type={box.type} name={box.name} />
-                    </div>
-                ))}
+                <div className='inputBoxes'>
+                    {inputBoxes.map((box, i) => (
+                        <div key={i} className='customInput'>
+                            <CustomInput value={box.value} ability={box.ability} type={box.type} name={box.name} />
+                        </div>
+                    ))}
+                </div>
 
-                <div className='clickableDiv' onClick={() => addExercise(exercise)}>ADD EXERCISE</div>
+                <div className='customControl'>
+                    <div className='inputButton' onClick={() => addExercise(exercise)}>Add</div>
+                    <div className='inputButton' onClick={() => setCustomWorkout([])}>Reset</div>
+                </div>
 
-                <div className='clickableDiv' onClick={() => beginCustomWorkout()}>Begin Custom Workout</div>
-
-                <div className='clickableDiv' onClick={() => setCustomWorkout([])}>Reset Workout</div>
+                <div className='inputButton setCustom' onClick={() => beginCustomWorkout()}>Workout Ready</div>
 
 
             </div>
             <WorkoutList workout={customWorkout} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} />
 
-        </div>
+        </m.div>
     )
 }
 

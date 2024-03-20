@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion as m } from 'framer-motion';
 
 import './Spartacus.css';
 
@@ -104,7 +105,14 @@ const Spartacus = (
 
 
   return (
-    <div className="spartacusWorkout">
+    <m.div
+      className="spartacusWorkout"
+      key={'/spartacus'}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: 'easeInOut' }}
+    >
 
       <div className='clockTime'>
 
@@ -128,7 +136,7 @@ const Spartacus = (
 
       <WorkoutList workout={exerciseList} position={position} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} />
 
-    </div>
+    </m.div>
   )
 }
 

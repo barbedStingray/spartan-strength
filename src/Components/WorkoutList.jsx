@@ -12,13 +12,18 @@ const WorkoutList = ({
     newArray.splice(spot, 1);
     setCustomWorkout(newArray);
   }
+  function doNothing(){
+    console.log('I do nothing');
+  }
 
   return (
     <div className='workoutList'>
       {workout.map((exercise, i) => (
-        <div key={i} className={position > i ? 'exercise exerciseComplete' : 'exercise'}>
+        <div key={i}
+          className={position > i ? 'exercise exerciseComplete' : 'exercise'}
+          onClick={customEdit ? () => deleteExercise(i, customWorkout) : () => doNothing() }
+        >
           <p>{exercise}</p>
-          {customEdit ? <div className='clickableDiv' onClick={() => deleteExercise(i, customWorkout)}>X</div> : <></>}
         </div>
       ))}
     </div>

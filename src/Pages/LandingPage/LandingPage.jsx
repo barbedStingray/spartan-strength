@@ -1,5 +1,6 @@
 import React from 'react';
 import './LandingPage.css';
+import { motion as m } from 'framer-motion';
 
 import LandingLink from '../../Components/LandingLink';
 
@@ -24,7 +25,14 @@ const LandingPage = ({
 
 
   return (
-    <div className='landingPage'>
+    <m.div 
+      className='landingPage'
+      key={'/landing'}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: 'easeInOut' }}
+    >
 
       <div className='landingLinks'>
         {titles.map((item, i) => (
@@ -40,7 +48,7 @@ const LandingPage = ({
         ))}
       </div>
 
-    </div>
+    </m.div>
   )
 }
 

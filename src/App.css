@@ -56,8 +56,8 @@
   text-align: center;
   transition: 0.3s;
 
-    font-family: roman;
-    text-shadow: none;
+    /* font-family: roman; */
+    /* text-shadow: none; */
     -webkit-text-stroke: 0.5px;
     -webkit-text-stroke-color: black;
     color: var(--color-blue);

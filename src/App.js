@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './App.css';
-
+import { AnimatePresence } from 'framer-motion';
 
 // import useInterval from './Components/useInterval';
 import LandingPage from './Pages/LandingPage/LandingPage';
@@ -15,6 +16,8 @@ import CustomWork from './Pages/CustomWork/CustomWork';
 import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
+
+  const location = useLocation();
 
   const [title, setTitle] = useState('Welcome!');
 
@@ -43,7 +46,7 @@ function App() {
   const [workTime, setWorkTime] = useState(60); // workout time 60s
   const [restTime, setRestTime] = useState(15); // rest time 15s
   const [buttonToggle, setButtonToggle] = useState(false); // button display
-  const [customEdit, setCustomEdit] = useState(false); 
+  const [customEdit, setCustomEdit] = useState(false);
 
 
   function resetWorkout() {
@@ -62,64 +65,70 @@ function App() {
 
       <Header title={title} setTitle={setTitle} />
 
-      <Routes>
 
-        <Route path='/'
-          element={
-            <LandingPage
-              setCustomEdit={setCustomEdit}
-              setTitle={setTitle}
-              setExerciseList={setExerciseList}
-              setWorkTime={setWorkTime} setRestTime={setRestTime}
-              spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
-              resetWorkout={resetWorkout}
-            />
-          }
-        />
-        <Route path='/stopwatch'
-          element={
-            <StopWatch
-              runTime={runTime} setRunTime={setRunTime}
-              delay={delay}
-              count={count} setCount={setCount}
-            />
-          }
-        />
-        <Route path='/spartacus'
-          element={
-            <Spartacus
-              exerciseList={exerciseList}
-              runTime={runTime} setRunTime={setRunTime}
-              position={position} setPosition={setPosition}
-              delay={delay}
-              count={count} setCount={setCount}
-              circleTime={circleTime} setCircleTime={setCircleTime}
-              rest={rest} setRest={setRest}
-              workTime={workTime} restTime={restTime}
-              buttonToggle={buttonToggle} setButtonToggle={setButtonToggle}
-              spartacusWorkout={spartacusWorkout}
-              customEdit={customEdit}
-              customWorkout={customWorkout} setCustomWorkout={setCustomWorkout}
-              resetWorkout={resetWorkout} setTitle={setTitle}
-            />
-          }
-        />
-        <Route path='/custom'
-          element={
-            <CustomWork
-              setExerciseList={setExerciseList}
-              workTime={workTime} setWorkTime={setWorkTime}
-              restTime={restTime} setRestTime={setRestTime}
-              customWorkout={customWorkout} setCustomWorkout={setCustomWorkout}
-              customEdit={customEdit} setCustomEdit={setCustomEdit}
-              resetWorkout={resetWorkout}
-            />
-          }
-        />
-        <Route path='/workoutComplete' element={<WorkoutComplete setTitle={setTitle} resetWorkout={resetWorkout} />} />
-        <Route path='*' element={<FourOhFour />} />
+      <AnimatePresence
+        mode='wait'
+        // initial={false}
+      >
+        {/* really important for unmounting/mounting tracking */}
+        <Routes location={location} key={location.pathname}> 
+          <Route path='/'
+            element={
+              <LandingPage
+                setCustomEdit={setCustomEdit}
+                setTitle={setTitle}
+                setExerciseList={setExerciseList}
+                setWorkTime={setWorkTime} setRestTime={setRestTime}
+                spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
+                resetWorkout={resetWorkout}
+              />
+            }
+          />
+          <Route path='/stopwatch'
+            element={
+              <StopWatch
+                runTime={runTime} setRunTime={setRunTime}
+                delay={delay}
+                count={count} setCount={setCount}
+              />
+            }
+          />
+          <Route path='/spartacus'
+            element={
+              <Spartacus
+                exerciseList={exerciseList}
+                runTime={runTime} setRunTime={setRunTime}
+                position={position} setPosition={setPosition}
+                delay={delay}
+                count={count} setCount={setCount}
+                circleTime={circleTime} setCircleTime={setCircleTime}
+                rest={rest} setRest={setRest}
+                workTime={workTime} restTime={restTime}
+                buttonToggle={buttonToggle} setButtonToggle={setButtonToggle}
+                spartacusWorkout={spartacusWorkout}
+                customEdit={customEdit}
+                customWorkout={customWorkout} setCustomWorkout={setCustomWorkout}
+                resetWorkout={resetWorkout} setTitle={setTitle}
+              />
+            }
+          />
+          <Route path='/custom'
+            element={
+              <CustomWork
+                setExerciseList={setExerciseList}
+                workTime={workTime} setWorkTime={setWorkTime}
+                restTime={restTime} setRestTime={setRestTime}
+                customWorkout={customWorkout} setCustomWorkout={setCustomWorkout}
+                customEdit={customEdit} setCustomEdit={setCustomEdit}
+                resetWorkout={resetWorkout}
+              />
+            }
+          />
+          <Route path='/workoutComplete' element={<WorkoutComplete setTitle={setTitle} resetWorkout={resetWorkout} />} />
+          <Route path='*' element={<FourOhFour />} />
 
-      </Routes>
+        </Routes>
+      </AnimatePresence>
 
       <Footer />
 

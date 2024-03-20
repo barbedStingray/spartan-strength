@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion as m } from 'framer-motion';
 import useInterval from '../../Components/useInterval';
 import './Stopwatch.css';
 
@@ -38,7 +39,14 @@ const Stopwatch = ({
 
 
     return (
-        <div className="stopWatch">
+        <m.div
+            className="stopWatch"
+            key={'/stopWatch'}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+        >
 
             <div className='timeClock'>
                 <div>
@@ -73,7 +81,7 @@ const Stopwatch = ({
             </div>
 
 
-        </div>
+        </m.div>
     )
 }
 

@@ -7,3 +7,69 @@
     align-items: center;
     
 }
+.customInputContainer {
+    /* border: 2px solid magenta; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    /* flex: 3; */
+    height: 76vh;
+}
+.customControl {
+    /* border: 2px solid red; */
+    margin: 3.5vh 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+}
+
+.inputBoxes {
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 6vh;
+    gap: 2vh;
+
+}
+.inputBox {
+    /* border: 2px solid red; */
+    background-color: #00000000;
+    text-align: center;
+    font-size: 4vh;
+    width: 80%;
+    font-family: roman;
+    color: var(--color-red);
+}
+
+.inputButton, .setCustom {
+    /* border: 2px solid yellow; */
+    border-radius: 5px;
+    padding: 5px;
+    width: 18vh;
+    font-size: 5vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+  
+    text-align: center;
+    transition: 0.3s;
+  
+      /* font-family: roman; */
+      /* text-shadow: none; */
+      -webkit-text-stroke: 0.5px;
+      -webkit-text-stroke-color: black;
+      color: var(--color-blue);
+  
+}
+.setCustom {
+    /* border: 2px solid orange; */
+    width: 40vh;
+}
+.inputButton:hover {
+    background-color: var(--color-white);
+  }
+  

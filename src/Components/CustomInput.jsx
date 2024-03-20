@@ -2,12 +2,16 @@ import React from 'react'
 
 const CustomInput = ({ value, ability, type, name }) => {
     return (
-        <input
-            value={value}
-            onChange={(e) => ability(e.target.value)}
-            type={type}
-            placeholder={name}
-        />
+        <>
+            <p>{name}</p>
+            <input
+                className='inputBox'
+                value={value}
+                onChange={(e) => ability(e.target.value)}
+                type={type}
+                placeholder={name}
+            />
+        </>
     )
 }
 
