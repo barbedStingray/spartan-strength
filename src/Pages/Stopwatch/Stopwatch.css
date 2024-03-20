@@ -15,7 +15,6 @@
 }
 .timeClock {
     /* border: 2px solid red; */
-    font-size: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,3 +60,41 @@
 .deleteButton:hover {
     background-color: #80808044;
 }
+
+
+
+
+@media (max-width: 390px) {
+    .stopWatch {
+        padding: 0px 5vw 0px 5vw;
+    }
+    .watchButtons {
+        /* border: 2px solid blue; */
+        flex-direction: column;
+        align-items: center;
+        gap: 4vw;
+        margin-top: 10px;
+    }
+    .clickableDiv {
+        font-size: 4vh;
+        width: 40%;
+    }
+    .timeClock {
+        /* border: 2px solid red; */
+        height: 30vw;
+        font-size: 5.5vh;
+        margin-top: 30px;
+    }
+    .lapLog {
+        /* border: 2px solid magenta; */
+        gap: 5px;
+        height: 25vh;
+        overflow: scroll;
+        margin-top: 20px;
+    
+    }
+    .lap {
+        /* border: 2px solid red; */
+        font-size: 3.25vh;
+    }
+      }

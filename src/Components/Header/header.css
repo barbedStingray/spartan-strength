@@ -20,3 +20,20 @@
 .homeButton:hover {
     color: darkred;
 }
+
+
+@media (max-width: 390px) {
+    /* * HEADER */
+    .header {
+      font-size: 6vh;
+      gap: 10px;
+  }
+  .homeButton {
+      width: 10vh;
+      font-size: 8vh;
+  }
+  .homeButton:hover {
+      color: darkred;
+  }
+  }
+  
