@@ -9,7 +9,7 @@ const Header = ({ title, setTitle }) => {
     <div className='header'>
 
       <Link to='/'>
-        <div className='homeButton' onClick={() => setTitle('Welcome')}>
+        <div className='homeButton' onClick={() => setTitle('Gratitude')}>
           <GiSpartan />
         </div>
       </Link>
