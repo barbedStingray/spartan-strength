@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion as m } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import './WorkoutComplete.css';
 
 import LandingLink from '../../Components/LandingLink';

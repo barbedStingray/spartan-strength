@@ -72,12 +72,10 @@
 
 /* TIMER CSS */
 .circleContainer {
-  /* border: 2px solid black; */
+  border: 2px solid black;
   position: relative;
-  height: 100%;
   width: 100%;
   /* height: 70vh; */
-
   display: flex;
   /* flex: 10; */
   height: 65%;
@@ -113,5 +111,16 @@
 }
 
 
+@media (max-width: 390px) {
+  /* TIMER CSS */
+.circleContainer {
+  border: 2px solid black;
+  height: 45%;
+}
+.count {
+  font-size: 20vh;
+}
+
+}
 
 

@@ -30,3 +30,20 @@ a {
     text-decoration: none;
     color: var(--color-blue);
 }
+
+@media (max-width: 390px) {
+    .landingPage {
+        padding: 0px 5vw 20vh 5vw;
+    }
+    .landingLinks {
+        /* border: 2px solid magenta; */
+        /* width: 100%; */
+        gap: 0vh;
+        font-size: 10vh;
+    }
+    .landLink {
+        /* border: 2px solid red; */
+        width: 100%;
+        font-size: 7vh;
+    }
+}

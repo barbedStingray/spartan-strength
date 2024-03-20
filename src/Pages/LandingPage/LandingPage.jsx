@@ -16,8 +16,8 @@ const LandingPage = ({
 
   // pathways for navigation component
   const titles = [
-    { path: '/stopwatch', name: 'StopWatch' },
     { path: '/spartacus', name: 'Spartacus' },
+    { path: '/stopwatch', name: 'StopWatch' },
     { path: '/custom', name: 'Custom' }
   ];
 

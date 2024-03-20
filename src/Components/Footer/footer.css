@@ -1,7 +1,7 @@
 
 .footer {
     /* border: 2px solid blue; */
-    /* border-top: 4.5px double black; */
+    border-top: 4.5px double black;
 
     height: 7vh;
     display: flex;
@@ -16,4 +16,10 @@
     /* border: 2px solid red; */
     height: 4.5vh;
     background-image: url('../../Photos/DRedIcon.png');
+}
+
+@media (max-width: 390px) {
+    .footer {
+        justify-content: center;
+    }
 }

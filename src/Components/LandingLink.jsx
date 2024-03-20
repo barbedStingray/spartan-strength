@@ -35,7 +35,7 @@ const LandingLink = ({
   return (
     <Link to={path}>
       <div className='landLink' onClick={() => resetParameters()}>
-        <p>{name}</p>
+        <p className='mobile'>{name}</p>
       </div>
     </Link>
   )

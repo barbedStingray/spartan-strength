@@ -10,7 +10,7 @@
 }
 
 .completeTitle {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     font-size: 7vw;
     text-align: center;
     font-family: ocean;
@@ -28,4 +28,22 @@
 .fontAdjust {
     /* border: 2px solid gold; */
     font-size: 7vh;
+}
+
+@media (max-width: 390px) {
+    .workoutComplete {
+        /* border: 2px solid red; */
+        padding: 4vh 5vw 0px 5vw;
+        gap: 4vh;
+    }
+    .completeTitle {
+        /* border: 2px solid blue; */
+        font-size: 6vh;
+    }
+    .completeQuote {
+        /* border: 2px solid purple; */
+        font-size: 4vh;
+        width: 100%;
+        text-align: center;
+    }
 }
