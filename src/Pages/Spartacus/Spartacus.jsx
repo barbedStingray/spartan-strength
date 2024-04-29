@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './Spartacus.css';
@@ -27,6 +28,24 @@ const Spartacus = (
 
   const navigate = useNavigate();
 
+  const [dbSpartacus, setdbSpartacus] = useState(['start db']);
+
+  function getSpartacusWorkout() {
+    console.log('getting Spartacus from database');
+
+    axios.get('/api/exercise/spartacus').then((response) => {
+      console.log('GET spartacus response:', response.data);
+      
+      setdbSpartacus(response.data)
+
+    }).catch((error) => {
+      console.log('GET error in spartacus');
+    });
+  }
+
+  useEffect(() => {
+    getSpartacusWorkout();
+  }, []);
 
   function playAudioZero() {
     new Audio(sound0).play();
@@ -127,6 +146,8 @@ const Spartacus = (
       </div>
 
       <WorkoutList workout={exerciseList} position={position} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} />
+
+      {JSON.stringify(dbSpartacus)}
 
     </m.div>
   )
