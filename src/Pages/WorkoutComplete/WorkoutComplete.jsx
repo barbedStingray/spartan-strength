@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion as m } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import './WorkoutComplete.css';
 
 import LandingLink from '../../Components/LandingLink';
 
-const WorkoutComplete = ({ setTitle, resetWorkout }) => {
+const WorkoutComplete = ({
+  setTitle,
+  // resetWorkout 
+}) => {
 
   const options = [
     { path: '/spartacus', name: 'For Glory' },
@@ -52,7 +54,9 @@ const WorkoutComplete = ({ setTitle, resetWorkout }) => {
       <div className='landingLinks'>
         {options.map((item, i) => (
           <div className='fontAdjust' key={i}>
-            <LandingLink setTitle={setTitle} path={item.path} name={item.name} resetWorkout={resetWorkout} />
+            <LandingLink setTitle={setTitle} path={item.path} name={item.name}
+              // resetWorkout={resetWorkout}
+            />
           </div>
         ))}
       </div>

@@ -7,13 +7,13 @@ const LandingLink = ({
   setExerciseList,
   setWorkTime, setRestTime,
   setCustomEdit,
-  resetWorkout
+  // resetWorkout
 }) => {
 
 
   function resetParameters() {
 
-    resetWorkout(); 
+    // resetWorkout(); 
     setTitle(name);
 
     if ( name === 'Spartacus' ) {

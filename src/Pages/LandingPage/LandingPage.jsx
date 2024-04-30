@@ -11,14 +11,14 @@ const LandingPage = ({
   setExerciseList,
   setRestTime, setWorkTime,
   setCustomEdit,
-  resetWorkout
+  // resetWorkout
 }) => {
 
   // pathways for navigation component
   const titles = [
     { path: '/spartacus', name: 'Spartacus' },
     { path: '/stopwatch', name: 'StopWatch' },
-    { path: '/custom', name: 'Custom' }
+    { path: '/select', name: 'Select' }
   ];
 
   return (
@@ -40,7 +40,7 @@ const LandingPage = ({
             spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
             setWorkTime={setWorkTime} setRestTime={setRestTime}
             setCustomEdit={setCustomEdit}
-            resetWorkout={resetWorkout}
+            // resetWorkout={resetWorkout}
           />
         ))}
       </div>
