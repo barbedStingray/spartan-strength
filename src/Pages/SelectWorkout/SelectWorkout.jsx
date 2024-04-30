@@ -31,20 +31,19 @@ const SelectWorkout = ({
         getPersonalWorkoutList();
     }, []);
 
+    function displayExerciseList(id) {
+        console.log('getting exercises', id);
 
-    function handleWorkoutChange(e) {
-        console.log('getting exercises');
-        const { value } = e.target;
-        setMasterWorkout(value);
-
-        axios.get(`/api/exercise/exercises/${value}`).then((response) => {
+        axios.get(`/api/exercise/exercises/${id}`).then((response) => {
             console.log('GET exercises response:', response.data);
             setExerciseList(response.data);
-
         }).catch((error) => {
             console.log('GET error in exercises');
         });
     }
+    useEffect(() => {
+        displayExerciseList(masterWorkout);
+    }, [masterWorkout]);
 
     function beginCustomWorkout() {
         console.log('beginning custom workout');
@@ -73,6 +72,21 @@ const SelectWorkout = ({
     function editWorkout(id) {
         console.log('editing workout', id);
         navigate(`/custom/${id}`);
+    }
+
+    function deleteWorkout(id) {
+        console.log('deleting entire workout', id);
+
+        axios.delete(`/api/exercise/deleteWorkout/${id}`).then((response) => {
+            console.log('/deleteWorkout success');
+            // ? will this work? 
+            setExerciseList([]);
+            setMasterWorkout('0');
+            getPersonalWorkoutList();
+
+        }).catch((error) => {
+            console.log('/deleteExercise ERROR', error);
+        });
     }
 
 
@@ -114,10 +128,11 @@ const SelectWorkout = ({
 
 
             <select
-                onChange={(e) => handleWorkoutChange(e)}
+                onChange={(e) => setMasterWorkout(e.target.value)}
+                // onChange={(e) => handleWorkoutChange(e)}
                 value={masterWorkout}
             >
-                <option value={0}>Spartacus</option>
+                <option value={0}>Select One...</option>
                 {workoutsList.map((workout) => (
                     <option
                         key={workout.id}
@@ -159,9 +174,12 @@ const SelectWorkout = ({
                 <p>Edit Workout</p>
             </div>
 
-
-
-
+            <div
+                className='inputButton setCustom'
+                onClick={() => deleteWorkout(masterWorkout)}
+            >
+                <p>Delete Workout</p>
+            </div>
         </m.div >
     )
 }

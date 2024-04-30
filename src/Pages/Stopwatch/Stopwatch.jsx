@@ -5,11 +5,12 @@ import './Stopwatch.css';
 import useInterval from '../../Components/useInterval';
 
 
-const Stopwatch = ({
-    runTime, setRunTime,
-    delay,
-    count, setCount
-}) => {
+const Stopwatch = () => {
+
+    const [runTime, setRunTime] = useState(false); // starts/stops timer
+    const [delay] = useState(1000); // delay triggers useEffect 
+    const [count, setCount] = useState(0); // universal counter
+  
 
     // time clock display
     const hours = Math.floor(count / (1000 * 60 * 60));

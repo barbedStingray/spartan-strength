@@ -14,11 +14,6 @@ import sound0 from '../../audio/beep-09.wav';
 
 const Spartacus = (
   { masterWorkout,
-    exerciseList,
-    runTime, setRunTime,
-    position, setPosition,
-    delay, count, setCount,
-    circleTime, setCircleTime,
     workTime, restTime,
     setTitle
   }) => {
@@ -28,6 +23,12 @@ const Spartacus = (
   const [dbWorkout, setdbWorkout] = useState([]);
   const [buttonToggle, setButtonToggle] = useState(false); // button display
   const [rest, setRest] = useState(true); // resting vs working toggle
+  const [circleTime, setCircleTime] = useState(0); // sets total circle time for timer
+  const [runTime, setRunTime] = useState(false); // starts/stops timer
+  const [position, setPosition] = useState(0); // position within the workout
+  const [delay] = useState(1000); // delay triggers useEffect 
+  const [count, setCount] = useState(0); // universal counter
+
 
 
   function resetWorkout() {
@@ -77,7 +78,7 @@ const Spartacus = (
 
   useInterval(
     () => {
-      if (position === exerciseList.length && rest === false) {
+      if (position === dbWorkout.length && rest === false) {
         resetWorkout();
         setTitle('Victory');
         navigate('/workoutComplete');
@@ -124,10 +125,10 @@ const Spartacus = (
     if (runTime === false) {
       return <p>Prepare Yourself</p>
     }
-    else if (position < exerciseList.length) {
-      return <p>{rest ? `Next: ${exerciseList[position]}` : `${exerciseList[position]}`}</p>
+    else if (position < dbWorkout.length) {
+      return <p>{rest ? `Next: ${dbWorkout[position]}` : `${dbWorkout[position]}`}</p>
     }
-    else if (position === exerciseList.length) {
+    else if (position === dbWorkout.length) {
       return <p>Workout Complete</p>
     }
     else {

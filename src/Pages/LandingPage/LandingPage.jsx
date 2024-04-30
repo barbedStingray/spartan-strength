@@ -7,7 +7,7 @@ import LandingLink from '../../Components/LandingLink';
 
 const LandingPage = ({ 
   setTitle,
-  spartacusWorkout, customWorkout,
+  customWorkout,
   setExerciseList,
   setRestTime, setWorkTime,
   setCustomEdit,
@@ -37,7 +37,7 @@ const LandingPage = ({
             key={i}
             setExerciseList={setExerciseList}
             setTitle={setTitle} path={item.path} name={item.name} 
-            spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
+            customWorkout={customWorkout}
             setWorkTime={setWorkTime} setRestTime={setRestTime}
             setCustomEdit={setCustomEdit}
             // resetWorkout={resetWorkout}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const LandingLink = ({
   setTitle, path, name,
-  spartacusWorkout, customWorkout,
+ customWorkout,
   setExerciseList,
   setWorkTime, setRestTime,
   setCustomEdit,
@@ -17,7 +17,7 @@ const LandingLink = ({
     setTitle(name);
 
     if ( name === 'Spartacus' ) {
-      setExerciseList(spartacusWorkout);
+      // setExerciseList(spartacusWorkout);
       setWorkTime(60);
       setRestTime(15);
       setCustomEdit(false);
