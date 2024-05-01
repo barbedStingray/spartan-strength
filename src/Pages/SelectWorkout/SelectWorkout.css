@@ -1,0 +1,116 @@
+.selectWorkoutPage {
+    border: 2px solid magenta;
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    flex: 1;
+    /* margin-right: 15vh; */
+}
+
+.leftSide {
+    border: 2px solid blue;
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+}
+
+.workAndRest {
+    border: 2px solid red;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.workRest {
+    border: 2px solid black;
+    display: flex;
+    flex-flow: row no wrap;
+    justify-content: center;
+}
+
+.workRestTitle,
+.workRestInput {
+    /* border: 2px solid magenta; */
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 5vh;
+}
+
+.timeInput {
+    border: 2px solid green;
+    font-family: roman;
+    font-size: 5vh;
+    width: 80%;
+    text-align: center;
+}
+
+.selectInputWorkout {
+    border: 2px solid lime;
+    display: flex;
+    justify-content: center;
+}
+
+.workoutSelect {
+    border: 2px solid blue;
+    font-size: 5vh;
+    font-family: roman;
+}
+
+.selectExerciseList {
+    border: 2px solid orange;
+    background-color: var(--color-white);
+    color: var(--color-blue);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1vh auto;
+    width: 70%;
+    /* flex: 1; */
+    height: 55vh;
+    overflow: scroll;
+    -webkit-text-stroke: 0.7px;
+    -webkit-text-stroke-color: black;
+}
+
+.selectExerciseList p {
+    border: 2px solid red;
+    font-size: 4vh;
+    margin: 0.5vh;
+}
+
+
+
+
+
+
+
+
+.rightSide {
+    border: 2px solid black;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+}
+
+
+.selectButton {
+    /* border: 2px solid yellow; */
+    width: 60%;
+    border-radius: 5px;
+    padding: 0.25vh 1vh;
+    /* width: 18vh; */
+    font-size: 6vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    transition: 0.3s;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+    color: var(--color-blue);
+}
+.selectButton:hover {
+    background-color: var(--color-white);
+  }

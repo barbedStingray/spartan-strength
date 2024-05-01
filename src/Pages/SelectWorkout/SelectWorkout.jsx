@@ -3,6 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 
+import WorkoutList from '../../Components/WorkoutList';
+
+import './SelectWorkout.css';
+
 
 const SelectWorkout = ({
     masterWorkout, setMasterWorkout,
@@ -91,7 +95,7 @@ const SelectWorkout = ({
 
     return (
         <m.div
-            className='selectWorkout'
+            className='selectWorkoutPage'
             key={'/select'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -99,80 +103,109 @@ const SelectWorkout = ({
             transition={{ duration: 0.25, ease: 'easeInOut' }}
         >
 
-            <p>This is the Select Workout Page</p>
-            <input
-                className='inputBox'
-                value={workTime} // value will be workTime
-                onChange={(e) => setWorkTime(e.target.value)}
-                type='text'
-                placeholder='work'
-            />
-            <input
-                className='inputBox'
-                value={restTime} // value will be rest
-                onChange={(e) => setRestTime(e.target.value)}
-                type='text'
-                placeholder='Rest'
-            />
-            <br />
-            {JSON.stringify(workoutsList)}
-            <br />
-            {JSON.stringify(exerciseList)}
-            <br />
 
 
-            <select
-                onChange={(e) => setMasterWorkout(e.target.value)}
-                value={masterWorkout}
-            >
-                <option value={0}>Select One...</option>
-                {workoutsList.map((workout) => (
-                    <option
-                        key={workout.id}
-                        value={workout.id}
+
+            <div className='leftSide'>
+
+                <div className='workAndRest'>
+                    <div className='workRest'>
+                        <div className='workRestTitle'>
+                            <p>Work:</p>
+                        </div>
+                        <div className='workRestInput'>
+                            <input
+                                className='timeInput'
+                                value={workTime} // value will be workTime
+                                onChange={(e) => setWorkTime(e.target.value)}
+                                type='text'
+                                placeholder='work'
+                            />
+                        </div>
+                    </div>
+                    <div className='workRest'>
+                        <div className='workRestTitle'>
+                            <p>Rest:</p>
+                        </div>
+                        <div className='workRestInput'>
+                            <input
+                                className='timeInput'
+                                value={restTime} // value will be rest
+                                onChange={(e) => setRestTime(e.target.value)}
+                                type='text'
+                                placeholder='Rest'
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className='selectInputWorkout'>
+                    <select
+                        className='workoutSelect'
+                        onChange={(e) => setMasterWorkout(e.target.value)}
+                        value={masterWorkout}
                     >
-                        {workout.name}
-                    </option>
-                ))}
-            </select>
-            {JSON.stringify(masterWorkout)}
+                        <option value={0}>Select One...</option>
+                        {workoutsList.map((workout) => (
+                            <option
+                                key={workout.id}
+                                value={workout.id}
+                            >
+                                {workout.name}
+                            </option>
+                        ))}
+                    </select>
 
-            <div
-                className='inputButton setCustom'
-                onClick={beginCustomWorkout}
-            >
-                <p>Begin Workout</p>
+                </div>
+
+                <div className='selectExerciseList'>
+                    {exerciseList.map((exercise) => (
+                        <p key={exercise.id}>{exercise.exercise}</p>
+                    ))}
+                </div>
+
             </div>
 
-            <input
-                className='inputBox'
-                value={workoutName}
-                onChange={(e) => setWorkoutName(e.target.value)}
-                type='text'
-                placeholder='Workout Name'
-            />
-            {JSON.stringify(workoutName)}
 
-            <div
-                className='inputButton setCustom'
-                onClick={createNewWorkout}
-            >
-                <p>New Workout</p>
+
+
+            <div className='rightSide'>
+
+
+                <div
+                    className='selectButton'
+                    onClick={beginCustomWorkout}
+                >
+                    <p>Begin Workout</p>
+                </div>
+
+
+                <input
+                    className='inputBox'
+                    value={workoutName}
+                    onChange={(e) => setWorkoutName(e.target.value)}
+                    type='text'
+                    placeholder='Workout Name'
+                />
+
+                <div
+                    className='selectButton'
+                    onClick={createNewWorkout}
+                ><p>New Workout</p></div>
+
+                <div
+                    className='selectButton'
+                    onClick={() => editWorkout(masterWorkout)}
+                ><p>Edit Workout</p></div>
+
+                <div
+                    className='selectButton'
+                    onClick={() => deleteWorkout(masterWorkout)}
+                ><p>Delete Workout</p></div>
+
             </div>
 
-            <div
-                className='inputButton setCustom'
-                onClick={() => editWorkout(masterWorkout)}
-            >
-                <p>Edit Workout</p>
-            </div>
 
-            <div
-                className='inputButton setCustom'
-                onClick={() => deleteWorkout(masterWorkout)}
-            >
-                <p>Delete Workout</p>
-            </div>
         </m.div >
     )
 }
