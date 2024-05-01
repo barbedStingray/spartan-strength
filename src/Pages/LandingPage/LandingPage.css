@@ -14,14 +14,6 @@
     font-size: 10vh;
     text-align: center;
 }
-.landLink {
-    /* border: 2px solid red; */
-    -webkit-text-stroke-color: black;
-    width: 60vh;
-    padding: 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
 .landLink:hover {
     background-color: var(--color-white);
     /* box-shadow: 0 0 5px #fff; */

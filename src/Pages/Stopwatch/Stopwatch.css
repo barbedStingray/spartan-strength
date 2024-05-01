@@ -1,9 +1,11 @@
 .stopWatch {
     /* border: 2px solid green; */
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
+    align-items: center;
     flex: 1;
     padding: 0px 15vw 0px 5vw;
+    gap: 3vh;
 }
 .watchButtons {
     /* border: 2px solid blue; */
@@ -13,6 +15,42 @@
     gap: 6vw;
     margin-top: 10px;
 }
+.stopwatchClick {
+    /* border: 2px solid gold; */
+    width: 50%;
+    /* WHAT DO I DO HERE??? */
+    min-width: 120px;
+    max-width: 200px;
+    border-radius: 5px;
+    padding: 0.25vh 1vh;
+    font-size: 4vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    transition: 0.3s;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+    color: var(--color-blue);
+}
+
+.lapClick {
+    /* border: 2px solid gold; */
+    width: 20%;
+    /* WHAT DO I DO HERE??? */
+    min-width: 120px;
+    max-width: 160px;
+    border-radius: 5px;
+    padding: 0.25vh 1vh;
+    font-size: 4vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    transition: 0.3s;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+    color: var(--color-blue);
+
+}
 .timeClock {
     /* border: 2px solid red; */
     display: flex;
@@ -20,9 +58,8 @@
     align-items: center;
     text-align: center;
     gap: 6vw;
-    height: 20vw;
-    font-size: 7vw;
-    margin-top: 20px;
+    font-size: 8vh;
+    margin-top: 3vh;
     color: var(--color-red);
 }
 .lapLog {
@@ -33,8 +70,9 @@
     align-items: center;
     gap: 10px;
     height: 30vh;
+    width: 80%;
     overflow: scroll;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 
 }
 .lap {

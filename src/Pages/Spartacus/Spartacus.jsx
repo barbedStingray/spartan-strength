@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './Spartacus.css';
@@ -12,21 +13,50 @@ import sound0 from '../../audio/beep-09.wav';
 
 
 const Spartacus = (
-  { exerciseList,
-    runTime, setRunTime,
-    position, setPosition,
-    delay, count, setCount,
-    circleTime, setCircleTime,
-    rest, setRest,
+  { masterWorkout,
     workTime, restTime,
-    buttonToggle, setButtonToggle,
-    customEdit,
-    customWorkout, setCustomWorkout,
-    resetWorkout, setTitle
+    setTitle
   }) => {
 
   const navigate = useNavigate();
 
+  const [dbWorkout, setdbWorkout] = useState([]);
+  const [buttonToggle, setButtonToggle] = useState(false); // button display
+  const [rest, setRest] = useState(true); // resting vs working toggle
+  const [circleTime, setCircleTime] = useState(0); // sets total circle time for timer
+  const [runTime, setRunTime] = useState(false); // starts/stops timer
+  const [position, setPosition] = useState(0); // position within the workout
+  const [delay] = useState(1000); // delay triggers useEffect 
+  const [count, setCount] = useState(0); // universal counter
+
+
+
+
+  // write a conditional for which exercise to request // NUMBER REQEUST 
+  function getDataBaseWorkout() {
+    // console.log('getting workout from database');
+    if (masterWorkout === '0') {
+      axios.get('/api/exercise/spartacus').then((response) => {
+        // console.log('GET spartacus response:', response.data);
+        setdbWorkout(response.data)
+      }).catch((error) => {
+        console.log('GET error in spartacus');
+      });
+    }
+    else {
+      // console.log('loading custom workout', masterWorkout);
+      axios.get(`/api/exercise/exercises/${masterWorkout}`).then((response) => {
+        // console.log('GET exercises response:', response.data);
+        setdbWorkout(response.data);
+      }).catch((error) => {
+        console.log('GET error in exercises');
+      });
+    }
+  }
+
+  useEffect(() => {
+    getDataBaseWorkout();
+  }, []);
 
   function playAudioZero() {
     new Audio(sound0).play();
@@ -37,7 +67,7 @@ const Spartacus = (
 
   useInterval(
     () => {
-      if (position === exerciseList.length && rest === false) {
+      if (position === dbWorkout.length && rest === false) {
         resetWorkout();
         setTitle('Victory');
         navigate('/workoutComplete');
@@ -74,20 +104,31 @@ const Spartacus = (
     }
   }
   function beginWorkout() {
-    setCount(10);
-    setCircleTime(10);
+    setCount(15);
+    setCircleTime(15);
     setRunTime(!runTime);
     setButtonToggle(!buttonToggle);
   }
+
+  function resetWorkout() {
+    // reset your variables back to base mode
+    setRunTime(false);
+    setButtonToggle(false);
+    setPosition(0);
+    setCount(0);
+    setRest(true);
+    setCircleTime(0); // match the count
+  }
+
 
   function exerciseDisplay() {
     if (runTime === false) {
       return <p>Prepare Yourself</p>
     }
-    else if (position < exerciseList.length) {
-      return <p>{rest ? `Next: ${exerciseList[position]}` : `${exerciseList[position]}`}</p>
+    else if (position < dbWorkout.length) {
+      return <p>{rest ? `Next: ${dbWorkout[position].exercise}` : `${dbWorkout[position].exercise}`}</p>
     }
-    else if (position === exerciseList.length) {
+    else if (position === dbWorkout.length) {
       return <p>Workout Complete</p>
     }
     else {
@@ -126,7 +167,7 @@ const Spartacus = (
         </div>
       </div>
 
-      <WorkoutList workout={exerciseList} position={position} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} />
+      <WorkoutList dbWorkout={dbWorkout} position={position} />
 
     </m.div>
   )
