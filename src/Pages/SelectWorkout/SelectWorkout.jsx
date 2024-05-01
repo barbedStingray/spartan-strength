@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
-import axios from 'axios';
 
 
 const SelectWorkout = ({
@@ -54,7 +54,6 @@ const SelectWorkout = ({
     function createNewWorkout() {
         console.log('creating new workout', workoutName);
 
-        // axios POST
         axios.post(`/api/exercise/newWorkout`, { workoutName }).then((response) => {
             console.log('POST newWorkout response:', response.data);
             getPersonalWorkoutList(); // regenerate list
@@ -64,8 +63,6 @@ const SelectWorkout = ({
 
         }).catch((error) => {
             console.log('POST error /newWorkout', error);
-        }).finally(() => {
-            // gets executed regardless if pass/fail
         });
     }
 
@@ -92,8 +89,6 @@ const SelectWorkout = ({
 
 
 
-
-
     return (
         <m.div
             className='selectWorkout'
@@ -103,7 +98,6 @@ const SelectWorkout = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
         >
-
 
             <p>This is the Select Workout Page</p>
             <input
@@ -129,7 +123,6 @@ const SelectWorkout = ({
 
             <select
                 onChange={(e) => setMasterWorkout(e.target.value)}
-                // onChange={(e) => handleWorkoutChange(e)}
                 value={masterWorkout}
             >
                 <option value={0}>Select One...</option>
@@ -153,7 +146,7 @@ const SelectWorkout = ({
 
             <input
                 className='inputBox'
-                value={workoutName} // value will be rest
+                value={workoutName}
                 onChange={(e) => setWorkoutName(e.target.value)}
                 type='text'
                 placeholder='Workout Name'

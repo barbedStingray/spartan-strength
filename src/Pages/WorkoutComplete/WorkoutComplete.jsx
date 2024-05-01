@@ -2,12 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion as m } from 'framer-motion';
 import './WorkoutComplete.css';
 
-import LandingLink from '../../Components/LandingLink';
 
-const WorkoutComplete = ({
-  setTitle,
-  // resetWorkout 
-}) => {
+const WorkoutComplete = ({ setTitle }) => {
 
   const options = [
     { path: '/spartacus', name: 'For Glory' },
@@ -51,12 +47,11 @@ const WorkoutComplete = ({
         <p>{quote}</p>
       </div>
 
+    {/* todo Adjust your Links */}
       <div className='landingLinks'>
         {options.map((item, i) => (
           <div className='fontAdjust' key={i}>
-            <LandingLink setTitle={setTitle} path={item.path} name={item.name}
-              // resetWorkout={resetWorkout}
-            />
+            <p key={i}>{item.name}</p>
           </div>
         ))}
       </div>

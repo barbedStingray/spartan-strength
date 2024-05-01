@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './CustomWork.css';
 
-import WorkoutList from '../../Components/WorkoutList';
-import CustomInput from '../../Components/CustomInput';
+import Exercise from '../../Components/Exercise';
+
 
 const CustomWork = () => {
 
-    const navigate = useNavigate();
     const { id } = useParams();
-
 
     const [exerciseList, setExerciseList] = useState([]);
     const [exerciseName, setExerciseName] = useState('');
@@ -19,7 +17,6 @@ const CustomWork = () => {
 
     async function getWorkoutExercises(id) {
         // console.log('getting exercises for workout', id);
-
         try {
             const exercises = await axios.get(`/api/exercise/exercises/${id}`);
             console.log('exercises', exercises.data);
@@ -48,67 +45,6 @@ const CustomWork = () => {
         });
     }
 
-    function deleteExercise(exercise) {
-        console.log('deleting exercise', exercise);
-
-        axios.delete(`/api/exercise/deleteExercise/${exercise}`).then((response) => {
-            console.log('/deleteExercise success');
-            getWorkoutExercises(id);
-        }).catch((error) => {
-            console.log('DELETE /deleteExercise', error);
-        });
-    }
-
-    function deleteWorkout(id) {
-        console.log('deleting entire workout', id);
-
-        axios.delete(`/api/exercise/deleteWorkout/${id}`).then((response) => {
-            console.log('/deleteWorkout success');
-            navigate('/select');
-            // ?? Set the masterWorkout Number again? 
-
-        }).catch((error) => {
-            console.log('/deleteExercise ERROR', error);
-        });
-    }
-
-    function moveExerciseBackward(exerciseID) {
-        // console.log('move exercise down in list', exerciseID);
-        const index = exerciseList.findIndex((item) => item.id === exerciseID);
-        // console.log('INDEX', index);
-
-        if (index === -1 || index === exerciseList.length - 1) {
-            // console.log('cannot move object down');
-            return;
-        } else {
-            // console.log('BACKWARDS');
-            const newArray = [...exerciseList];
-            const objectShift = newArray.splice(index, 1)[0];
-            // console.log('ObjectShift', objectShift);
-            newArray.splice(index + 1, 0, objectShift);
-            // console.log('FINAL', newArray);
-            setExerciseList(newArray);
-        }
-    }
-    function moveExerciseForward(exerciseID) {
-        // console.log('move exercise up in list', exerciseID);
-
-        const index = exerciseList.findIndex((item) => item.id === exerciseID);
-        // console.log('INDEX', index);
-
-        if (index === -1 || index === 0) {
-            // console.log('cannot move object up');
-            return;
-        } else {
-            // console.log('FORWARDS');
-            const newArray = [...exerciseList];
-            const objectShift = newArray.splice(index, 1)[0];
-            // console.log('ObjectShift', objectShift);
-            newArray.splice(index - 1, 0, objectShift);
-            // console.log('FINAL', newArray);
-            setExerciseList(newArray);
-        }
-    }
 
     // save changes - deletes old, posts new array of changes
     // just saves the order of exercises
@@ -143,7 +79,7 @@ const CustomWork = () => {
             <form onSubmit={(e) => addNewExercise(e)}>
                 <input
                     className='inputBox'
-                    value={exerciseName} // value will be rest
+                    value={exerciseName}
                     onChange={(e) => setExerciseName(e.target.value)}
                     type='text'
                     placeholder='Exercise Name'
@@ -155,14 +91,15 @@ const CustomWork = () => {
             <p>{title}</p>
 
             {exerciseList.map((exercise) => (
-                <div key={exercise.id}>
-                    <p>{exercise.exercise}</p>
-                    <button onClick={() => deleteExercise(exercise.id)}>DELETE</button>
-                    <button onClick={() => moveExerciseForward(exercise.id)}>UP</button>
-                    <button onClick={() => moveExerciseBackward(exercise.id)}>DOWN</button>
-                </div>
+                <Exercise 
+                    key={exercise.id}
+                    id={id}
+                    exercise={exercise} 
+                    getWorkoutExercises={getWorkoutExercises}
+                    exerciseList={exerciseList}
+                    setExerciseList={setExerciseList}
+                />
             ))}
-
 
             <Link to={'/select'}>
                 <div
@@ -175,25 +112,12 @@ const CustomWork = () => {
 
             <div
                 className='inputButton setCustom'
-                onClick={() => deleteWorkout(id)}
-            >
-                <p>Delete Workout</p>
-            </div>
-
-            <div
-                className='inputButton setCustom'
                 onClick={() => saveWorkoutExerciseChanges(id)}
             >
                 <p>Save Changes</p>
             </div>
 
             {JSON.stringify(exerciseList)}
-
-
-
-
-
-
 
         </m.div>
     )

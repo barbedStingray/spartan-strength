@@ -8,34 +8,7 @@
     padding: 0px 15vw 0px 5vw;
     
 }
-/* .customInputContainer {
-    border: 2px solid magenta;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    height: 76vh;
-} */
-/* .customControl {
-    border: 2px solid red;
-    margin: 3.5vh 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3vh;
-} */
 
-/* .inputBoxes {
-    border: 2px solid green;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 6vh;
-    gap: 2vh;
-
-} */
 .inputBox {
     /* border: 2px solid red; */
     background-color: #00000000;

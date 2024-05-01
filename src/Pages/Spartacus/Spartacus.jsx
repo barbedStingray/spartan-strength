@@ -31,33 +31,22 @@ const Spartacus = (
 
 
 
-  function resetWorkout() {
-    // reset your variables back to base mode
-    setRunTime(false);
-    setButtonToggle(false);
-    setPosition(0);
-    setCount(0);
-    setRest(true);
-    setCircleTime(0); // match the count
-  }
-
-
 
   // write a conditional for which exercise to request // NUMBER REQEUST 
   function getDataBaseWorkout() {
-    console.log('getting workout from database');
+    // console.log('getting workout from database');
     if (masterWorkout === '0') {
       axios.get('/api/exercise/spartacus').then((response) => {
-        console.log('GET spartacus response:', response.data);
+        // console.log('GET spartacus response:', response.data);
         setdbWorkout(response.data)
       }).catch((error) => {
         console.log('GET error in spartacus');
       });
     }
     else {
-      console.log('loading custom workout', masterWorkout);
+      // console.log('loading custom workout', masterWorkout);
       axios.get(`/api/exercise/exercises/${masterWorkout}`).then((response) => {
-        console.log('GET exercises response:', response.data);
+        // console.log('GET exercises response:', response.data);
         setdbWorkout(response.data);
       }).catch((error) => {
         console.log('GET error in exercises');
@@ -115,18 +104,29 @@ const Spartacus = (
     }
   }
   function beginWorkout() {
-    setCount(10);
-    setCircleTime(10);
+    setCount(15);
+    setCircleTime(15);
     setRunTime(!runTime);
     setButtonToggle(!buttonToggle);
   }
+
+  function resetWorkout() {
+    // reset your variables back to base mode
+    setRunTime(false);
+    setButtonToggle(false);
+    setPosition(0);
+    setCount(0);
+    setRest(true);
+    setCircleTime(0); // match the count
+  }
+
 
   function exerciseDisplay() {
     if (runTime === false) {
       return <p>Prepare Yourself</p>
     }
     else if (position < dbWorkout.length) {
-      return <p>{rest ? `Next: ${dbWorkout[position]}` : `${dbWorkout[position]}`}</p>
+      return <p>{rest ? `Next: ${dbWorkout[position].exercise}` : `${dbWorkout[position].exercise}`}</p>
     }
     else if (position === dbWorkout.length) {
       return <p>Workout Complete</p>
@@ -167,8 +167,7 @@ const Spartacus = (
         </div>
       </div>
 
-      {/* <WorkoutList workout={exerciseList} position={position} customEdit={customEdit} customWorkout={customWorkout} setCustomWorkout={setCustomWorkout} /> */}
-      <WorkoutList dbSpartacus={dbWorkout} />
+      <WorkoutList dbWorkout={dbWorkout} position={position} />
       {JSON.stringify(masterWorkout)}
 
     </m.div>

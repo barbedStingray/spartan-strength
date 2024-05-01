@@ -127,7 +127,7 @@ router.post('/updateWorkout', async (req, res) => {
     ;`;
 
     try {
-        for(let exercise of exerciseList) {
+        for (let exercise of exerciseList) {
             await pool.query(queryText, [id, exercise.exercise]);
             console.log('inserted exercise', exercise.exercise);
         }
@@ -191,6 +191,25 @@ router.delete('/clearAll/:id', (req, res) => {
     });
 });
 
+
+
 // PUT
+// change exercise name
+router.put('/editExercise/:id', (req, res) => {
+    console.log('/editExercise', req.params.id, req.body.newName);
+    const newName = req.body.newName;
+    const queryText = `UPDATE 
+        "workout_exercise"
+        SET "exercise" = $1
+        WHERE "id" = $2;`;
+
+    pool.query(queryText, [newName, req.params.id]).then((result) => {
+        console.log('/editExercise success');
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('/editExercise ERROR', error);
+        res.sendStatus(500);
+    });
+});
 
 module.exports = router;

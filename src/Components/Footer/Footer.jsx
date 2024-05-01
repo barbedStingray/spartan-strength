@@ -8,6 +8,7 @@ const Footer = () => {
     <div className='footer'>
       <p>Barbed</p>
       <img className='stingIcon' src={Stingray} alt='stingray-logo' />
+      {/* onClick function to a page that displays your personal record */}
       <p>Stingray</p>
     </div>
   )

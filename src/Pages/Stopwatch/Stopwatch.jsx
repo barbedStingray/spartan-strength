@@ -11,7 +11,6 @@ const Stopwatch = () => {
     const [delay] = useState(1000); // delay triggers useEffect 
     const [count, setCount] = useState(0); // universal counter
   
-
     // time clock display
     const hours = Math.floor(count / (1000 * 60 * 60));
     const minutes = Math.floor((count % (1000 * 60 * 60)) / (1000 * 60) * 1000);
