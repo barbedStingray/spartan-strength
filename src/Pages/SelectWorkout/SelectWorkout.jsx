@@ -194,6 +194,7 @@ const SelectWorkout = ({
                             <p key={exercise.id}>{exercise.exercise}</p>
                         ))}
                     </div>
+                    {/* <WorkoutList dbWorkout={exerciseList} /> */}
                 </div>
 
             </div>
