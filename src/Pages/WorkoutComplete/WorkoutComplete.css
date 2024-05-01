@@ -25,10 +25,32 @@
     width: 75%;
     text-align: center;
 }
-.fontAdjust {
-    /* border: 2px solid gold; */
+
+.workoutCompleteButton {
+    /* border: 2px solid green; */
+    border-radius: 5px;
+    padding: 0.25vh 3vh;
     font-size: 7vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    transition: 0.3s;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+    color: var(--color-blue);
 }
+
+.workoutCompleteButton:hover {
+    background-color: var(--color-white);
+}
+
+
+
+
+
+
+
+
 
 @media (max-width: 390px) {
     .workoutComplete {
@@ -36,10 +58,12 @@
         padding: 4vh 5vw 0px 5vw;
         gap: 4vh;
     }
+
     .completeTitle {
         /* border: 2px solid blue; */
         font-size: 6vh;
     }
+
     .completeQuote {
         /* border: 2px solid purple; */
         font-size: 4vh;

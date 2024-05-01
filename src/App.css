@@ -32,7 +32,7 @@
 
 /* APP DIV */
 .spartanStrength {
-  border: 2px solid orangered;
+  /* border: 2px solid orangered; */
   width: 100vw;
   height: 100vh;
   display: flex;

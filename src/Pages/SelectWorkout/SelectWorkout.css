@@ -131,7 +131,7 @@
     background-color: #00000000;
     text-align: center;
     font-size: 4vh;
-    width: 80%;
+    width: 95%;
     font-family: roman;
     color: var(--color-red);
 }
@@ -154,7 +154,6 @@
     color: var(--color-blue);
 
 }
-
 .selectButton:hover {
     background-color: var(--color-white);
 }
