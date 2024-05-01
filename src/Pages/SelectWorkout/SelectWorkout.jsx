@@ -56,7 +56,12 @@ const SelectWorkout = ({
     }
 
     function createNewWorkout() {
-        console.log('creating new workout', workoutName);
+        // console.log('creating new workout', workoutName);
+
+        if (!validateInput(workoutName)) {
+            alert('Please Name Your Workout');
+            return;
+        }
 
         axios.post(`/api/exercise/newWorkout`, { workoutName }).then((response) => {
             console.log('POST newWorkout response:', response.data);
@@ -71,12 +76,21 @@ const SelectWorkout = ({
     }
 
     function editWorkout(id) {
-        console.log('editing workout', id);
+        // console.log('editing workout', id);
+        if (!validateWorkout(id)) {
+            alert('Please Select a Workout to Edit');
+            return;
+        }
         navigate(`/custom/${id}`);
     }
 
     function deleteWorkout(id) {
         console.log('deleting entire workout', id);
+
+        if (!validateWorkout(id)) {
+            alert('Please Select a Workout to Delete');
+            return;
+        }
 
         axios.delete(`/api/exercise/deleteWorkout/${id}`).then((response) => {
             console.log('/deleteWorkout success');
@@ -88,6 +102,23 @@ const SelectWorkout = ({
         }).catch((error) => {
             console.log('/deleteExercise ERROR', error);
         });
+    }
+
+    function validateInput(string) {
+        // console.log('string.length', string.length);
+        if (string.length === 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function validateWorkout(workout) {
+        // console.log('workoutNumber', workout);
+        if (workout === '0') {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -118,7 +149,7 @@ const SelectWorkout = ({
                                 className='timeInput'
                                 value={workTime} // value will be workTime
                                 onChange={(e) => setWorkTime(e.target.value)}
-                                type='text'
+                                type='number'
                                 placeholder='work'
                             />
                         </div>
@@ -132,7 +163,7 @@ const SelectWorkout = ({
                                 className='timeInput'
                                 value={restTime} // value will be rest
                                 onChange={(e) => setRestTime(e.target.value)}
-                                type='text'
+                                type='number'
                                 placeholder='Rest'
                             />
                         </div>
@@ -157,11 +188,12 @@ const SelectWorkout = ({
                     </select>
 
                 </div>
-
-                <div className='selectExerciseList'>
-                    {exerciseList.map((exercise) => (
-                        <p key={exercise.id}>{exercise.exercise}</p>
-                    ))}
+                <div className='exerciseScroll'>
+                    <div className='selectExerciseList'>
+                        {exerciseList.map((exercise) => (
+                            <p key={exercise.id}>{exercise.exercise}</p>
+                        ))}
+                    </div>
                 </div>
 
             </div>
@@ -179,29 +211,30 @@ const SelectWorkout = ({
                     <p>Begin Workout</p>
                 </div>
 
+                <div className='createWorkout'>
+                    <input
+                        className='newWorkoutName'
+                        value={workoutName}
+                        onChange={(e) => setWorkoutName(e.target.value)}
+                        type='text'
+                        placeholder='Workout Name'
+                    />
 
-                <input
-                    className='inputBox'
-                    value={workoutName}
-                    onChange={(e) => setWorkoutName(e.target.value)}
-                    type='text'
-                    placeholder='Workout Name'
-                />
-
-                <div
-                    className='selectButton'
-                    onClick={createNewWorkout}
-                ><p>New Workout</p></div>
+                    <div
+                        className='selectButton'
+                        onClick={createNewWorkout}
+                    ><p>Create</p></div>
+                </div>
 
                 <div
                     className='selectButton'
                     onClick={() => editWorkout(masterWorkout)}
-                ><p>Edit Workout</p></div>
+                ><p>Edit</p></div>
 
                 <div
                     className='selectButton'
                     onClick={() => deleteWorkout(masterWorkout)}
-                ><p>Delete Workout</p></div>
+                ><p>Delete</p></div>
 
             </div>
 

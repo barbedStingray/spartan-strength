@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import { GiBackstab } from "react-icons/gi";
+import { GiThrownSpear } from "react-icons/gi";
+import { GiShieldBounces } from "react-icons/gi";
+
+
+
 const Exercise = ({
     id, exercise, getWorkoutExercises,
     exerciseList, setExerciseList
@@ -77,32 +83,45 @@ const Exercise = ({
 
 
     return (
-        <div key={exercise.id}>
-            {editToggle ?
-                <>
-                    <input
-                        type='text'
-                        value={exerciseEdit}
-                        onChange={(e) => setExerciseEdit(e.target.value)}
-                        placeholder='Edit Exercise'
-                    />
-                    {JSON.stringify(exerciseEdit)}
-                </>
-                :
-                <p>{exercise.exercise}</p>
-            }
-            <p>{exercise.exercise}</p>
-            <button onClick={() => deleteExercise(exercise.id)}>DELETE</button>
-            <button onClick={() => moveExerciseForward(exercise.id)}>UP</button>
-            <button onClick={() => moveExerciseBackward(exercise.id)}>DOWN</button>
-            {editToggle ?
-                <>
-                    <button onClick={() => saveEdits(exercise.id, exerciseEdit)}>Save</button>
-                    <button onClick={() => editExercise()}>X</button>
-                </>
-                :
-                <button onClick={() => editExercise()}>Edit</button>
-            }
+        <div
+            className='editExercise'
+            key={exercise.id}
+        >
+            <div className='exerciseName'>
+                {editToggle ?
+                    <>
+                        <input
+                            className='customEdit'
+                            type='text'
+                            value={exerciseEdit}
+                            onChange={(e) => setExerciseEdit(e.target.value)}
+                            placeholder='Edit Exercise'
+                        />
+                    </>
+                    :
+                    <p>{exercise.exercise}</p>
+                }
+            </div>
+
+            <div className='editOptionBar'>
+                {editToggle ?
+                    <div className='alteringExercises'>
+                        {/* <button onClick={() => saveEdits(exercise.id, exerciseEdit)}>Save</button> */}
+                        <div className='option' onClick={() => deleteExercise(exercise.id)}><GiBackstab /></div>
+                        <div className='option reverse' onClick={() => moveExerciseForward(exercise.id)}><GiThrownSpear /></div>
+                        <div className='option' onClick={() => moveExerciseBackward(exercise.id)}><GiThrownSpear /></div>
+                        <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
+                    </div>
+                    :
+                    <div className='editingExercises'>
+                        <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
+                        {/* <button onClick={() => deleteExercise(exercise.id)}>DELETE</button> */}
+                        {/* <button onClick={() => moveExerciseForward(exercise.id)}>UP</button> */}
+                        {/* <button onClick={() => moveExerciseBackward(exercise.id)}>DOWN</button> */}
+                        {/* <button onClick={() => editExercise()}>Edit</button> */}
+                    </div>
+                }
+            </div>
         </div>
     )
 }

@@ -168,7 +168,6 @@ const Spartacus = (
       </div>
 
       <WorkoutList dbWorkout={dbWorkout} position={position} />
-      {JSON.stringify(masterWorkout)}
 
     </m.div>
   )

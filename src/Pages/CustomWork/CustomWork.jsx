@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './CustomWork.css';
+
+
 
 import Exercise from '../../Components/Exercise';
 
 
 const CustomWork = () => {
 
+    const navigate = useNavigate();
     const { id } = useParams();
 
     const [exerciseList, setExerciseList] = useState([]);
@@ -57,7 +60,8 @@ const CustomWork = () => {
             console.log('delete success');
             await axios.post(`/api/exercise/updateWorkout`, { id, exerciseList });
             console.log('success in Save Changes');
-            getWorkoutExercises(id);
+            // getWorkoutExercises(id);
+            navigate('/select');
 
         } catch (error) {
             console.log('saveChanges ERROR', error);
@@ -76,48 +80,52 @@ const CustomWork = () => {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
         >
 
-            <form onSubmit={(e) => addNewExercise(e)}>
-                <input
-                    className='inputBox'
-                    value={exerciseName}
-                    onChange={(e) => setExerciseName(e.target.value)}
-                    type='text'
-                    placeholder='Exercise Name'
-                />
-                {JSON.stringify(exerciseName)}
-                <button type='submit'>Add</button>
-            </form>
+            <div className='customLeft'>
 
-            <p>{title}</p>
+                <form className='addExercise' onSubmit={(e) => addNewExercise(e)}>
+                    <input
+                        className='inputBox'
+                        value={exerciseName}
+                        onChange={(e) => setExerciseName(e.target.value)}
+                        type='text'
+                        placeholder='New Exercise'
+                    />
+                    <button className='customAddButton' type='submit'>Add</button>
+                </form>
 
-            {exerciseList.map((exercise) => (
-                <Exercise 
-                    key={exercise.id}
-                    id={id}
-                    exercise={exercise} 
-                    getWorkoutExercises={getWorkoutExercises}
-                    exerciseList={exerciseList}
-                    setExerciseList={setExerciseList}
-                />
-            ))}
-
-            <Link to={'/select'}>
+                <Link to={'/select'}>
+                    <div
+                        className='customButton'
+                    >
+                        <p>Back</p>
+                    </div>
+                </Link>
                 <div
-                    className='inputButton setCustom'
-                // onClick={() => editWorkout(masterWorkout)}
+                    className='customButton'
+                    onClick={() => saveWorkoutExerciseChanges(id)}
                 >
-                    <p>Back</p>
+                    <p>Save Changes</p>
                 </div>
-            </Link>
-
-            <div
-                className='inputButton setCustom'
-                onClick={() => saveWorkoutExerciseChanges(id)}
-            >
-                <p>Save Changes</p>
             </div>
 
-            {JSON.stringify(exerciseList)}
+            <div className='customRight'>
+                <div className='customTitle'>
+                    <p>{title}</p>
+                </div>
+
+                <div className='customList'>
+                    {exerciseList.map((exercise) => (
+                        <Exercise
+                            key={exercise.id}
+                            id={id}
+                            exercise={exercise}
+                            getWorkoutExercises={getWorkoutExercises}
+                            exerciseList={exerciseList}
+                            setExerciseList={setExerciseList}
+                        />
+                    ))}
+                </div>
+            </div>
 
         </m.div>
     )
