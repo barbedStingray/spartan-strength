@@ -123,6 +123,7 @@ const CustomWork = () => {
                             exerciseList={exerciseList}
                             setExerciseList={setExerciseList}
                         />
+                        
                     ))}
                 </div>
             </div>
