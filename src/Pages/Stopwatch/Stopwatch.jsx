@@ -5,11 +5,11 @@ import './Stopwatch.css';
 import useInterval from '../../Components/useInterval';
 
 
-const Stopwatch = ({
-    runTime, setRunTime,
-    delay,
-    count, setCount
-}) => {
+const Stopwatch = () => {
+
+    const [runTime, setRunTime] = useState(false); // starts/stops timer
+    const [delay] = useState(1000); // delay triggers useEffect 
+    const [count, setCount] = useState(0); // universal counter
 
     // time clock display
     const hours = Math.floor(count / (1000 * 60 * 60));
@@ -64,10 +64,11 @@ const Stopwatch = ({
             </div>
 
             <div className='watchButtons'>
-                <div className='clickableDiv' onClick={() => setRunTime(!runTime)}>{runTime ? 'Pause' : 'Start'}</div>
-                <div className='clickableDiv' onClick={() => timerReset()}>Reset</div>
-                <div className='clickableDiv' onClick={() => addLap()}>Lap</div>
+                <div className='stopwatchClick' onClick={() => setRunTime(!runTime)}>{runTime ? 'Pause' : 'Start'}</div>
+                <div className='stopwatchClick' onClick={() => timerReset()}>Reset</div>
             </div>
+
+            <div className='lapClick' onClick={() => addLap()}>Lap</div>
 
             <div className='lapLog'>
                 {laps.length === 0 ? null :

@@ -7,6 +7,7 @@
     flex: 1;
     padding: 0px 15vw 0px 5vw;
 }
+
 .clockTime {
     /* border: 2px solid gold; */
     display: flex;
@@ -15,7 +16,8 @@
     /* flex: 3; */
     height: 76vh;
 }
-.workoutButtons{
+
+.workoutButtons {
     /* border: 2px solid green; */
     display: flex;
     /* flex: 1; */
@@ -23,9 +25,28 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    gap: 25px;
     margin-bottom: 10px;
 }
+
+.clickableDiv {
+    /* border: 2px solid blue; */
+    width: 30%;
+    /* WHAT DO I DO HERE??? */
+    min-width: 120px;
+    max-width: 200px;
+    border-radius: 5px;
+    padding: 0.25vh 1vh;
+    font-size: 5vh;
+    cursor: pointer;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+    transition: 0.3s;
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: black;
+    color: var(--color-blue);
+
+}
+
 .workoutExercise {
     /* border: 2px solid red; */
     display: flex;
@@ -42,6 +63,7 @@
     -webkit-text-stroke: 0px;
 
 }
+
 .workoutList {
     /* border: 2px solid magenta; */
     /* height: 76vh; */
@@ -64,6 +86,7 @@
     background-color: var(--color-white);
     border-radius: 10px;
 }
+
 .exercise {
     /* border: 1px solid black; */
     width: 100%;
@@ -79,11 +102,13 @@
     color: var(--color-blue);
 
 }
+
 .exerciseComplete {
     text-decoration: line-through;
     text-decoration-color: black;
     color: var(--color-red);
 }
+
 .listDelete {
     border: 2px solid red;
 }
@@ -97,6 +122,10 @@
 
 
 
+
+
+
+
 @media (max-width: 390px) {
     .spartacusWorkout {
         /* border: 2px solid pink; */
@@ -104,22 +133,26 @@
         align-items: flex-start;
         gap: 1vh;
     }
+
     .clockTime {
         /* border: 2px solid gold; */
         height: 100%;
         width: 70%;
     }
-    .workoutButtons{
+
+    .workoutButtons {
         /* border: 2px solid green; */
         align-items: center;
         gap: 0px;
         height: 12%;
         margin-bottom: 0px;
     }
+
     .clickableDiv {
         font-size: 4vh;
         width: 43%;
     }
+
     .workoutExercise {
         /* border: 2px solid red; */
         padding-top: 10px;
@@ -129,11 +162,12 @@
         height: 50%;
 
     }
+
     .workoutList {
         /* border: 2px solid magenta; */
         margin-top: 2vh;
         max-height: 70vh;
         gap: 0.75vh;
-        font-size: 3.25vw;    
+        font-size: 3.25vw;
     }
 }

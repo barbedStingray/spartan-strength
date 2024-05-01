@@ -1,28 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import './LandingPage.css';
 
-import LandingLink from '../../Components/LandingLink';
 
-
-const LandingPage = ({ 
+const LandingPage = ({
   setTitle,
-  spartacusWorkout, customWorkout,
-  setExerciseList,
-  setRestTime, setWorkTime,
-  setCustomEdit,
-  resetWorkout
+  setMasterWorkout,
+  setWorkTime, setRestTime
 }) => {
 
-  // pathways for navigation component
+  // pathways 
   const titles = [
-    { path: '/spartacus', name: 'Spartacus' },
-    { path: '/stopwatch', name: 'StopWatch' },
-    { path: '/custom', name: 'Custom' }
+    { path: '/spartacus', name: 'Spartacus', ability: setClassicSpartacusWorkout },
+    { path: '/stopwatch', name: 'StopWatch', ability: setTitle },
+    { path: '/select', name: 'Select', ability: setTitle }
   ];
 
+  function setClassicSpartacusWorkout() {
+    console.log('setting the classic spartacus workout');
+    setMasterWorkout('0');
+    setWorkTime(60);
+    setRestTime(15);
+    setTitle('The Classic');
+  }
+
   return (
-    <m.div 
+    <m.div
       className='landingPage'
       key={'/landing'}
       initial={{ opacity: 0 }}
@@ -32,26 +36,17 @@ const LandingPage = ({
     >
 
       <div className='landingLinks'>
-        {titles.map((item, i) => (
-          <LandingLink 
-            key={i}
-            setExerciseList={setExerciseList}
-            setTitle={setTitle} path={item.path} name={item.name} 
-            spartacusWorkout={spartacusWorkout} customWorkout={customWorkout}
-            setWorkTime={setWorkTime} setRestTime={setRestTime}
-            setCustomEdit={setCustomEdit}
-            resetWorkout={resetWorkout}
-          />
+        {titles.map((title, i) => (
+          <Link to={title.path} key={i}>
+            <div onClick={() => title.ability(title.name)}>
+              <p>{title.name}</p>
+            </div>
+          </Link>
         ))}
       </div>
 
     </m.div>
   )
 }
-
-
-
-
-
 
 export default LandingPage
