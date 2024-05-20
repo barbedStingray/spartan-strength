@@ -54,9 +54,10 @@ router.get('/workoutsList', (req, res) => {
 router.get('/exercises/:id', (req, res) => {
     console.log('GET /exercises server', req.params.id);
 
+
     const queryText = `
     SELECT 
-	    "workout_exercise"."id",
+        "workout_exercise"."id",
 	    "workout_exercise"."exercise"
     FROM
         "workout_exercise"

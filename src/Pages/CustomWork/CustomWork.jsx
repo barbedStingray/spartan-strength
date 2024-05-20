@@ -19,8 +19,14 @@ const CustomWork = () => {
     const [title, setTitle] = useState('');
 
 
+    console.log('exerciseList', exerciseList);
+
     const initialItems = ['One', 'Two', 'Three'];
     const [items, setItems] = useState(initialItems);
+
+
+
+
 
 
 
@@ -30,10 +36,12 @@ const CustomWork = () => {
         // console.log('getting exercises for workout', id);
         try {
             const exercises = await axios.get(`/api/exercise/exercises/${id}`);
-            console.log('exercises', exercises.data);
+            // console.log('exercises', exercises.data);
             const workoutTitle = await axios.get(`/api/exercise/workoutName/${id}`);
             // console.log('workoutTitle', workoutTitle.data[0].name);
-            setExerciseList(exercises.data);
+            const exerciseNames = exercises.data.map(exercise => exercise.exercise);
+            console.log('exercise name array', exerciseNames);
+            setExerciseList(exerciseNames);
             setTitle(workoutTitle.data[0].name);
         } catch (error) {
             console.log('GET error in loading workout details', error);
@@ -43,18 +51,18 @@ const CustomWork = () => {
         getWorkoutExercises(id);
     }, []);
 
-    function addNewExercise(e) {
-        e.preventDefault();
-        console.log('adding new exercise', { id, exerciseName });
+    // function addNewExercise(e) {
+    //     e.preventDefault();
+    //     console.log('adding new exercise', { id, exerciseName });
 
-        axios.post(`/api/exercise/newExercise`, { id, exerciseName }).then((response) => {
-            console.log('POST newExercise response:', response.data);
-            getWorkoutExercises(id);
-            setExerciseName('');
-        }).catch((error) => {
-            console.log('POST error /newExercise', error);
-        });
-    }
+    //     axios.post(`/api/exercise/newExercise`, { id, exerciseName }).then((response) => {
+    //         console.log('POST newExercise response:', response.data);
+    //         getWorkoutExercises(id);
+    //         setExerciseName('');
+    //     }).catch((error) => {
+    //         console.log('POST error /newExercise', error);
+    //     });
+    // }
 
 
     // save changes - deletes old, posts new array of changes
@@ -85,15 +93,23 @@ const CustomWork = () => {
     const [isSorted, setIsSorted] = useState(false);
 
     function handleAdd() {
-        setItems(['New One', ...items]);
+        console.log('adding exercise:', exerciseName);
+        setExerciseList([exerciseName, ...exerciseList]);
     }
+    // function handleAdd() {
+    //     setItems(['New One', ...items]);
+    // }
     function handleReset() {
         setItems(initialItems);
     }
     function handleRemove() {
-        const [, ...rest] = items
-        setItems(rest);
+        const [, ...rest] = exerciseList
+        setExerciseList(rest);
     }
+    // function handleRemove() {
+    //     const [, ...rest] = items
+    //     setItems(rest);
+    // }
     function handleSort() {
         setIsSorted(!isSorted);
     }
@@ -104,6 +120,10 @@ const CustomWork = () => {
             return a.localeCompare(b)
         }
     }
+    console.log('new Exercise:', exerciseName);
+    console.log('new list:', exerciseList);
+
+
 
 
     return (
@@ -118,16 +138,16 @@ const CustomWork = () => {
 
             <div className='customLeft'>
 
-                <form className='addExercise' onSubmit={(e) => addNewExercise(e)}>
-                    <input
-                        className='inputBox'
-                        value={exerciseName}
-                        onChange={(e) => setExerciseName(e.target.value)}
-                        type='text'
-                        placeholder='New Exercise'
-                    />
-                    <button className='customAddButton' type='submit'>Add</button>
-                </form>
+                {/* <form className='addExercise' onSubmit={(e) => addNewExercise(e)}> */}
+                <input
+                    className='inputBox'
+                    value={exerciseName}
+                    onChange={(e) => setExerciseName(e.target.value)}
+                    type='text'
+                    placeholder='New Exercise'
+                />
+                <button className='customAddButton' type='submit'>Add</button>
+                {/* </form> */}
 
                 <Link to={'/select'}>
                     <div
@@ -165,16 +185,15 @@ const CustomWork = () => {
                 </div> */}
 
                 <div className='customList'>
+                    <div className='buttons'>
+                        <button onClick={handleAdd}>ADD</button>
+                        <button onClick={handleRemove}>Remove</button>
+                        <button onClick={handleSort}>Sort</button>
+                        <button onClick={handleReset}>Reset</button>
+                    </div>
                     <AnimatePresence>
-                        {[...exerciseList].map((exercise) => (
-                            <Exercise
-                                key={exercise.id}
-                                id={id}
-                                exercise={exercise}
-                                getWorkoutExercises={getWorkoutExercises}
-                                exerciseList={exerciseList}
-                                setExerciseList={setExerciseList}
-                            />
+                        {[...exerciseList].map((exercise, i) => (
+                            <Exercise key={i} exercise={exercise} />
                         ))}
                     </AnimatePresence>
                 </div>

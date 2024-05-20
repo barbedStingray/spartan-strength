@@ -5,6 +5,8 @@ const Item = ({ item }) => {
 
     const isPresent = useIsPresent();
 
+
+
     const animations = {
         style: {
             position: isPresent ? 'relative' : 'absolute'
