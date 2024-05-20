@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { motion as m, useIsPresent } from 'framer-motion';
+
 
 import { GiBackstab } from "react-icons/gi";
 import { GiThrownSpear } from "react-icons/gi";
@@ -14,6 +16,9 @@ const Exercise = ({
 
     const [editToggle, setEditToggle] = useState(false);
     const [exerciseEdit, setExerciseEdit] = useState(exercise.exercise);
+    const isPresent = useIsPresent();
+
+
 
     function deleteExercise(exercise) {
         console.log('deleting exercise', exercise);
@@ -81,9 +86,21 @@ const Exercise = ({
     }
 
 
+    const animations = {
+        // style: {
+        //     position: isPresent ? 'static' : 'absolute'
+        // },
+        initial: { scale: 0 },
+        animate: { scale: 1 },
+        exit: { scale: 0, position: 'absolute' },
+        transition: { type: 'spring', stiffness: 500, damping: 50 }
+    }
+
+
 
     return (
-        <div
+        <m.div
+            {...animations}
             className='editExercise'
             key={exercise.id}
         >
@@ -122,7 +139,7 @@ const Exercise = ({
                     </div>
                 }
             </div>
-        </div>
+        </m.div>
     )
 }
 

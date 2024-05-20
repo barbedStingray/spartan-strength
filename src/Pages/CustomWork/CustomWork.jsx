@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { motion as m } from 'framer-motion';
+import { AnimatePresence, motion as m, useIsPresent } from 'framer-motion';
 import './CustomWork.css';
 
-
-
+import FlipMove from 'react-flip-move';
 import Exercise from '../../Components/Exercise';
+import Item from '../../Components/Item';
 
 
 const CustomWork = () => {
@@ -17,6 +17,14 @@ const CustomWork = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [exerciseName, setExerciseName] = useState('');
     const [title, setTitle] = useState('');
+
+
+    const initialItems = ['One', 'Two', 'Three'];
+    const [items, setItems] = useState(initialItems);
+
+
+
+
 
     async function getWorkoutExercises(id) {
         // console.log('getting exercises for workout', id);
@@ -70,6 +78,34 @@ const CustomWork = () => {
 
 
 
+
+
+
+
+    const [isSorted, setIsSorted] = useState(false);
+
+    function handleAdd() {
+        setItems(['New One', ...items]);
+    }
+    function handleReset() {
+        setItems(initialItems);
+    }
+    function handleRemove() {
+        const [, ...rest] = items
+        setItems(rest);
+    }
+    function handleSort() {
+        setIsSorted(!isSorted);
+    }
+    function sort(a, b) {
+        if (!isSorted) {
+            return 0;
+        } else {
+            return a.localeCompare(b)
+        }
+    }
+
+
     return (
         <m.div
             className='customWork'
@@ -113,23 +149,44 @@ const CustomWork = () => {
                     <p>{title}</p>
                 </div>
 
+                {/* <div className='customList'>
+                    <div className='buttons'>
+                        <button onClick={handleAdd}>ADD</button>
+                        <button onClick={handleRemove}>Remove</button>
+                        <button onClick={handleSort}>Sort</button>
+                        <button onClick={handleReset}>Reset</button>
+                    </div>
+                    <AnimatePresence>
+                        {[...items].sort(sort).map((item, i) => (
+                            // <m.h1 key={i}>{item}</m.h1>
+                            <Item key={item} item={item} />
+                        ))}
+                    </AnimatePresence>
+                </div> */}
+
                 <div className='customList'>
-                    {exerciseList.map((exercise) => (
-                        <Exercise
-                            key={exercise.id}
-                            id={id}
-                            exercise={exercise}
-                            getWorkoutExercises={getWorkoutExercises}
-                            exerciseList={exerciseList}
-                            setExerciseList={setExerciseList}
-                        />
-                        
-                    ))}
+                    <AnimatePresence>
+                        {[...exerciseList].map((exercise) => (
+                            <Exercise
+                                key={exercise.id}
+                                id={id}
+                                exercise={exercise}
+                                getWorkoutExercises={getWorkoutExercises}
+                                exerciseList={exerciseList}
+                                setExerciseList={setExerciseList}
+                            />
+                        ))}
+                    </AnimatePresence>
                 </div>
+
+
+
+
             </div>
 
         </m.div>
     )
 }
+
 
 export default CustomWork
