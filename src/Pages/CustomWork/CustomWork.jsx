@@ -13,13 +13,14 @@ const CustomWork = () => {
 
     const navigate = useNavigate();
     const { id } = useParams();
+    // const isPresent = useIsPresent();
+
 
     const [exerciseList, setExerciseList] = useState([]);
     const [exerciseName, setExerciseName] = useState('');
     const [title, setTitle] = useState('');
 
 
-    console.log('exerciseList', exerciseList);
 
     const initialItems = ['One', 'Two', 'Three'];
     const [items, setItems] = useState(initialItems);
@@ -40,7 +41,7 @@ const CustomWork = () => {
             const workoutTitle = await axios.get(`/api/exercise/workoutName/${id}`);
             // console.log('workoutTitle', workoutTitle.data[0].name);
             const exerciseNames = exercises.data.map(exercise => exercise.exercise);
-            console.log('exercise name array', exerciseNames);
+            // console.log('exercise name array', exerciseNames);
             setExerciseList(exerciseNames);
             setTitle(workoutTitle.data[0].name);
         } catch (error) {
@@ -92,9 +93,12 @@ const CustomWork = () => {
 
     const [isSorted, setIsSorted] = useState(false);
 
-    function handleAdd() {
+    function handleAdd(e) {
+        e.preventDefault();
+
         console.log('adding exercise:', exerciseName);
-        setExerciseList([exerciseName, ...exerciseList]);
+        setExerciseList([...exerciseList, exerciseName]);
+        setExerciseName('');
     }
     // function handleAdd() {
     //     setItems(['New One', ...items]);
@@ -106,10 +110,7 @@ const CustomWork = () => {
         const [, ...rest] = exerciseList
         setExerciseList(rest);
     }
-    // function handleRemove() {
-    //     const [, ...rest] = items
-    //     setItems(rest);
-    // }
+
     function handleSort() {
         setIsSorted(!isSorted);
     }
@@ -120,9 +121,6 @@ const CustomWork = () => {
             return a.localeCompare(b)
         }
     }
-    console.log('new Exercise:', exerciseName);
-    console.log('new list:', exerciseList);
-
 
 
 
@@ -138,16 +136,16 @@ const CustomWork = () => {
 
             <div className='customLeft'>
 
-                {/* <form className='addExercise' onSubmit={(e) => addNewExercise(e)}> */}
-                <input
-                    className='inputBox'
-                    value={exerciseName}
-                    onChange={(e) => setExerciseName(e.target.value)}
-                    type='text'
-                    placeholder='New Exercise'
-                />
-                <button className='customAddButton' type='submit'>Add</button>
-                {/* </form> */}
+                <form className='addExercise' onSubmit={(e) => handleAdd(e)}>
+                    <input
+                        className='inputBox'
+                        value={exerciseName}
+                        onChange={(e) => setExerciseName(e.target.value)}
+                        type='text'
+                        placeholder='New Exercise'
+                    />
+                    <button className='customAddButton' type='submit'>Add</button>
+                </form>
 
                 <Link to={'/select'}>
                     <div
@@ -186,14 +184,16 @@ const CustomWork = () => {
 
                 <div className='customList'>
                     <div className='buttons'>
-                        <button onClick={handleAdd}>ADD</button>
+                        {/* <button onClick={handleAdd}>ADD</button> */}
                         <button onClick={handleRemove}>Remove</button>
                         <button onClick={handleSort}>Sort</button>
                         <button onClick={handleReset}>Reset</button>
                     </div>
                     <AnimatePresence>
                         {[...exerciseList].map((exercise, i) => (
-                            <Exercise key={i} exercise={exercise} />
+                            <Exercise key={exercise} exercise={exercise} index={i} 
+                            exerciseList={exerciseList} setExerciseList={setExerciseList}
+                            />
                         ))}
                     </AnimatePresence>
                 </div>

@@ -129,8 +129,8 @@ router.post('/updateWorkout', async (req, res) => {
 
     try {
         for (let exercise of exerciseList) {
-            await pool.query(queryText, [id, exercise.exercise]);
-            console.log('inserted exercise', exercise.exercise);
+            await pool.query(queryText, [id, exercise]);
+            console.log('inserted exercise', exercise);
         }
         console.log('all exercises inserted');
         res.sendStatus(200);
