@@ -1,0 +1,44 @@
+.benPR {
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+    font-family: ocean;
+    color: var(--color-red);
+    font-size: 3vh;
+    padding: 3vh 20vw 0vh 10vw;
+}
+
+.prBoard {
+    /* border: 2px solid pink; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 1vh;
+    width: 65vw;
+    font-family: roman;
+    margin-top: 2vh;
+    font-size: 2.75vh;
+    max-width: 525px;
+    min-width: 400px;
+
+}
+
+.exerciseRecord {
+    /* border: 2px solid magenta; */
+    background-color: var(--color-white);
+    border-radius: 10px;
+
+}
+
+.recordTitle {
+    /* border: 2px solid black; */
+    color: var(--color-blue);
+    padding: 0.75vh 1.5vh;
+}
+
+.recordStats {
+    /* border: 2px solid green; */
+    color: var(--color-yellow);
+    padding: 0.75vh 1.5vh;
+}
