@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { motion as m } from 'framer-motion';
+import { AnimatePresence, motion as m } from 'framer-motion';
 import './CustomWork.css';
 
-
-
 import Exercise from '../../Components/Exercise';
+// import Item from '../../Components/Item';
 
 
 const CustomWork = () => {
 
     const navigate = useNavigate();
     const { id } = useParams();
+    // const isPresent = useIsPresent();
+
 
     const [exerciseList, setExerciseList] = useState([]);
     const [exerciseName, setExerciseName] = useState('');
     const [title, setTitle] = useState('');
 
+    // const initialItems = ['One', 'Two', 'Three'];
+    // const [items, setItems] = useState(initialItems);
+
+
+
     async function getWorkoutExercises(id) {
         // console.log('getting exercises for workout', id);
         try {
             const exercises = await axios.get(`/api/exercise/exercises/${id}`);
-            console.log('exercises', exercises.data);
+            // console.log('exercises', exercises.data);
             const workoutTitle = await axios.get(`/api/exercise/workoutName/${id}`);
             // console.log('workoutTitle', workoutTitle.data[0].name);
-            setExerciseList(exercises.data);
+            const exerciseNames = exercises.data.map(exercise => exercise.exercise);
+            // console.log('exercise name array', exerciseNames);
+            setExerciseList(exerciseNames);
             setTitle(workoutTitle.data[0].name);
         } catch (error) {
             console.log('GET error in loading workout details', error);
@@ -35,18 +43,18 @@ const CustomWork = () => {
         getWorkoutExercises(id);
     }, []);
 
-    function addNewExercise(e) {
-        e.preventDefault();
-        console.log('adding new exercise', { id, exerciseName });
+    // function addNewExercise(e) {
+    //     e.preventDefault();
+    //     console.log('adding new exercise', { id, exerciseName });
 
-        axios.post(`/api/exercise/newExercise`, { id, exerciseName }).then((response) => {
-            console.log('POST newExercise response:', response.data);
-            getWorkoutExercises(id);
-            setExerciseName('');
-        }).catch((error) => {
-            console.log('POST error /newExercise', error);
-        });
-    }
+    //     axios.post(`/api/exercise/newExercise`, { id, exerciseName }).then((response) => {
+    //         console.log('POST newExercise response:', response.data);
+    //         getWorkoutExercises(id);
+    //         setExerciseName('');
+    //     }).catch((error) => {
+    //         console.log('POST error /newExercise', error);
+    //     });
+    // }
 
 
     // save changes - deletes old, posts new array of changes
@@ -69,6 +77,42 @@ const CustomWork = () => {
     }
 
 
+    function handleAdd(e) {
+        e.preventDefault();
+        console.log('adding exercise:', exerciseName);
+        setExerciseList([...exerciseList, exerciseName]);
+        setExerciseName('');
+    }
+
+    // const [isSorted, setIsSorted] = useState(false);
+
+    // function handleAdd() {
+    //     setItems(['New One', ...items]);
+    // }
+    // function handleReset() {
+    //     setItems(initialItems);
+    // }
+    // function handleRemove() {
+    //     const [, ...rest] = exerciseList
+    //     setExerciseList(rest);
+    // }
+
+    // function handleSort() {
+    //     setIsSorted(!isSorted);
+    // }
+    // function sort(a, b) {
+    //     if (!isSorted) {
+    //         return 0;
+    //     } else {
+    //         return a.localeCompare(b)
+    //     }
+    // }
+    // function generateRandomNumber() {
+    //     return Math.floor(Math.random() * 1000 + 1);
+    // }
+    // console.log(generateRandomNumber());
+
+
 
     return (
         <m.div
@@ -82,7 +126,7 @@ const CustomWork = () => {
 
             <div className='customLeft'>
 
-                <form className='addExercise' onSubmit={(e) => addNewExercise(e)}>
+                <form className='addExercise' onSubmit={(e) => handleAdd(e)}>
                     <input
                         className='inputBox'
                         value={exerciseName}
@@ -113,23 +157,39 @@ const CustomWork = () => {
                     <p>{title}</p>
                 </div>
 
+                {/* <div className='customList'>
+                    <div className='buttons'>
+                        <button onClick={handleAdd}>ADD</button>
+                        <button onClick={handleRemove}>Remove</button>
+                        <button onClick={handleSort}>Sort</button>
+                        <button onClick={handleReset}>Reset</button>
+                    </div>
+                    <AnimatePresence>
+                        {[...items].sort(sort).map((item, i) => (
+                            // <m.h1 key={i}>{item}</m.h1>
+                            <Item key={item} item={item} />
+                        ))}
+                    </AnimatePresence>
+                </div> */}
+
                 <div className='customList'>
-                    {exerciseList.map((exercise) => (
-                        <Exercise
-                            key={exercise.id}
-                            id={id}
-                            exercise={exercise}
-                            getWorkoutExercises={getWorkoutExercises}
-                            exerciseList={exerciseList}
-                            setExerciseList={setExerciseList}
-                        />
-                        
-                    ))}
+                    <AnimatePresence>
+                        {[...exerciseList].map((exercise, i) => (
+                            <Exercise key={exercise} exercise={exercise} index={i} 
+                            exerciseList={exerciseList} setExerciseList={setExerciseList}
+                            />
+                        ))}
+                    </AnimatePresence>
                 </div>
+
+
+
+
             </div>
 
         </m.div>
     )
 }
+
 
 export default CustomWork

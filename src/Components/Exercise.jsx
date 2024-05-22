@@ -1,60 +1,44 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import { motion as m } from 'framer-motion';
+
 
 import { GiBackstab } from "react-icons/gi";
 import { GiThrownSpear } from "react-icons/gi";
-import { GiShieldBounces } from "react-icons/gi";
+// import { GiShieldBounces } from "react-icons/gi";
 
 
 
-const Exercise = ({
-    id, exercise, getWorkoutExercises,
-    exerciseList, setExerciseList
-}) => {
+const Exercise = ({ exercise, exerciseList, setExerciseList, index }) => {
 
-    const [editToggle, setEditToggle] = useState(false);
-    const [exerciseEdit, setExerciseEdit] = useState(exercise.exercise);
+    const [isOpen, setIsOpen] = useState(false);
 
-    function deleteExercise(exercise) {
-        console.log('deleting exercise', exercise);
-
-        axios.delete(`/api/exercise/deleteExercise/${exercise}`).then((response) => {
-            console.log('/deleteExercise success');
-            getWorkoutExercises(id);
-        }).catch((error) => {
-            console.log('DELETE /deleteExercise', error);
-        });
+    const animations = {
+        // style: {
+        //     position: isPresent ? 'relative' : 'absolute'
+        // },
+        initial: { scale: 0 },
+        animate: { scale: 1 },
+        exit: { scale: 0, position: 'static' },
+        transition: { type: 'spring', stiffness: 500, damping: 50 }
     }
 
-    function moveExerciseBackward(exerciseID) {
-        // console.log('move exercise down in list', exerciseID);
-        const index = exerciseList.findIndex((item) => item.id === exerciseID);
-        // console.log('INDEX', index);
-
-        if (index === -1 || index === exerciseList.length - 1) {
-            // console.log('cannot move object down');
-            return;
-        } else {
-            // console.log('BACKWARDS');
-            const newArray = [...exerciseList];
-            const objectShift = newArray.splice(index, 1)[0];
-            // console.log('ObjectShift', objectShift);
-            newArray.splice(index + 1, 0, objectShift);
-            // console.log('FINAL', newArray);
-            setExerciseList(newArray);
-        }
+    function removeExercise(index) {
+        // console.log('removing exercise', index);
+        // console.log(exerciseList[index]);
+        const updatedArray = exerciseList.filter((word, i) => i !== index)
+        // console.log('updated Array', updatedArray);
+        setExerciseList(updatedArray);
     }
-    function moveExerciseForward(exerciseID) {
-        // console.log('move exercise up in list', exerciseID);
 
-        const index = exerciseList.findIndex((item) => item.id === exerciseID);
-        // console.log('INDEX', index);
+    function moveExerciseUp(index) {
+        console.log('moving exercise up', index);
 
         if (index === -1 || index === 0) {
-            // console.log('cannot move object up');
+            console.log('cannot move object up');
             return;
         } else {
-            // console.log('FORWARDS');
+            console.log('FORWARDS');
             const newArray = [...exerciseList];
             const objectShift = newArray.splice(index, 1)[0];
             // console.log('ObjectShift', objectShift);
@@ -64,65 +48,52 @@ const Exercise = ({
         }
     }
 
-    function editExercise() {
-        setEditToggle(!editToggle);
-    }
+    function moveExerciseDown(index) {
+        console.log('moving exercise Down', index);
+        if (index === -1 || index === exerciseList.length - 1) {
+            console.log('cannot move object down');
+            return;
+        } else {
+            console.log('BACKWARDS');
+            const newArray = [...exerciseList];
+            const objectShift = newArray.splice(index, 1)[0];
+            // console.log('ObjectShift', objectShift);
+            newArray.splice(index + 1, 0, objectShift);
+            // console.log('FINAL', newArray);
+            setExerciseList(newArray);
+        }
 
-    function saveEdits(exercise, newName) {
-        console.log('editing exercise', exercise, newName);
-
-        axios.put(`/api/exercise/editExercise/${exercise}`, { newName }).then((response) => {
-            console.log('/editExercise success');
-            getWorkoutExercises(id);
-            setEditToggle(!editToggle);
-        }).catch((error) => {
-            console.log('PUT /editExercise ERROR', error);
-        });
     }
 
 
 
     return (
-        <div
-            className='editExercise'
-            key={exercise.id}
+        <m.div {...animations} layout className='editExercise'
+            onMouseEnter={() => setIsOpen(!isOpen)}
+            onMouseLeave={() => setIsOpen(!isOpen)}
         >
-            <div className='exerciseName'>
-                {editToggle ?
-                    <>
-                        <input
-                            className='customEdit'
-                            type='text'
-                            value={exerciseEdit}
-                            onChange={(e) => setExerciseEdit(e.target.value)}
-                            placeholder='Edit Exercise'
-                        />
-                    </>
-                    :
-                    <p>{exercise.exercise}</p>
-                }
-            </div>
+            <m.div
+                className='exerciseExpand'
+                layout
+                transition={{ layout: { duration: 1, type: 'spring' } }}
+            >
+                <m.p className='exerciseName' layout='position' >{exercise}</m.p>
 
-            <div className='editOptionBar'>
-                {editToggle ?
-                    <div className='alteringExercises'>
-                        {/* <button onClick={() => saveEdits(exercise.id, exerciseEdit)}>Save</button> */}
-                        <div className='option' onClick={() => deleteExercise(exercise.id)}><GiBackstab /></div>
-                        <div className='option reverse' onClick={() => moveExerciseForward(exercise.id)}><GiThrownSpear /></div>
-                        <div className='option' onClick={() => moveExerciseBackward(exercise.id)}><GiThrownSpear /></div>
-                        <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
-                    </div>
-                    :
-                    <div className='editingExercises'>
-                        <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
-                        {/* <button onClick={() => deleteExercise(exercise.id)}>DELETE</button> */}
-                        {/* <button onClick={() => moveExerciseForward(exercise.id)}>UP</button> */}
-                        {/* <button onClick={() => moveExerciseBackward(exercise.id)}>DOWN</button> */}
-                        {/* <button onClick={() => editExercise()}>Edit</button> */}
-                    </div>
-                }
-            </div>
-        </div>
+            </m.div>
+            {isOpen && (
+                <m.div
+                    className='editOptionBar'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                >
+                    <button className='option' onClick={() => removeExercise(index)}><GiBackstab /></button>
+                    <button className='option reverse' onClick={() => moveExerciseUp(index)}><GiThrownSpear /></button>
+                    <button className='option' onClick={() => moveExerciseDown(index)}><GiThrownSpear /></button>
+                    {/* <button className='option' onClick={() => editExercise(index)}><GiShieldBounces /></button> */}
+                </m.div>
+            )}
+        </m.div>
     )
 }
 

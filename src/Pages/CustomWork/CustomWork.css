@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: flex-start;
     flex: 1;
-    padding: 3vh 15vw 0vh 1vw;
+    padding: 3vh 20vw 0vh 1vw;
 }
 
 .customRight {
@@ -13,7 +13,7 @@
     display: flex;
     flex-flow: column nowrap;
     flex: 2;
-    max-width: 410px;
+    max-width: 485px;
 }
 
 .customTitle {
@@ -30,6 +30,9 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
+
+    /* align-items: center; */
+
     gap: 1vh;
     margin-top: 2vh;
     height: 60vh;
@@ -45,18 +48,29 @@
     padding: 0 0.5vh;
 
 }
+.editOptionBar {
+    /* border: 2px solid black; */
+    display: flex;
+    gap: 0.5vh;
+    }    
 
-.exerciseName {
+
+.exerciseExpand {
     /* border: 2px solid magenta; */
-    font-size: 3.75vh;
+    font-size: 4vh;
     display: flex;
     justify-content: center;
-    text-align: center;
-    flex: 1.5;
+    flex: 1;
     color: var(--color-blue);
     background-color: var(--color-white);
     border-radius: 5px;
-    margin: 0 2vh;
+    margin: 0 0vh;
+}
+.exerciseName {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    
 }
 
 .customEdit {
@@ -70,23 +84,11 @@
 
 }
 
-.editOptionBar {
-    /* border: 2px solid black; */
-    display: flex;
-    /* flex: 1; */
-}
 
-.editingExercises,
-.alteringExercises {
-    /* border: 2px solid blue; */
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 1vh;
-}
 
 .option {
-    /* border: 2px solid white; */
-    width: 4vh;
+    border: 1px solid var(--color-blue);
+    width: 3vw;
     display: flex;
     justify-content: center;
     align-items: center;

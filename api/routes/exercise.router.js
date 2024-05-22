@@ -54,9 +54,10 @@ router.get('/workoutsList', (req, res) => {
 router.get('/exercises/:id', (req, res) => {
     console.log('GET /exercises server', req.params.id);
 
+
     const queryText = `
     SELECT 
-	    "workout_exercise"."id",
+        "workout_exercise"."id",
 	    "workout_exercise"."exercise"
     FROM
         "workout_exercise"
@@ -128,8 +129,8 @@ router.post('/updateWorkout', async (req, res) => {
 
     try {
         for (let exercise of exerciseList) {
-            await pool.query(queryText, [id, exercise.exercise]);
-            console.log('inserted exercise', exercise.exercise);
+            await pool.query(queryText, [id, exercise]);
+            console.log('inserted exercise', exercise);
         }
         console.log('all exercises inserted');
         res.sendStatus(200);
