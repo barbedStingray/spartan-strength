@@ -12,6 +12,7 @@ import WorkoutComplete from './Pages/WorkoutComplete/WorkoutComplete';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import FourOhFour from './Pages/FourOhFour';
+import BenPR from './Pages/BenPR/BenPR';
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path='/stopwatch' element={<StopWatch />} />
           <Route path='/custom/:id' element={<CustomWork />} />
           <Route path='*' element={<FourOhFour />} />
+          <Route path='/benPR' element={<BenPR />} />
 
           <Route path='/'
             element={
