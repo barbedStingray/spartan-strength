@@ -9,10 +9,17 @@
 .landingLinks {
     /* border: 2px solid magenta; */
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
+    align-items: center;
     gap: 2.5vh;
     font-size: 10vh;
     text-align: center;
+}
+.landLink {
+    /* border: 2px solid blue; */
+    padding: 0 2vh;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 .landLink:hover {
     background-color: var(--color-white);
@@ -23,7 +30,12 @@ a {
     color: var(--color-blue);
 }
 
-@media (max-width: 390px) {
+
+
+
+
+
+@media (max-width: 425px) {
     .landingPage {
         padding: 0px 5vw 20vh 5vw;
     }

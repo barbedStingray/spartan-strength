@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { AnimatePresence, motion as m, useIsPresent } from 'framer-motion';
+import { AnimatePresence, motion as m } from 'framer-motion';
 import './CustomWork.css';
 
-import FlipMove from 'react-flip-move';
 import Exercise from '../../Components/Exercise';
-import Item from '../../Components/Item';
+// import Item from '../../Components/Item';
 
 
 const CustomWork = () => {
@@ -20,16 +19,8 @@ const CustomWork = () => {
     const [exerciseName, setExerciseName] = useState('');
     const [title, setTitle] = useState('');
 
-
-
-    const initialItems = ['One', 'Two', 'Three'];
-    const [items, setItems] = useState(initialItems);
-
-
-
-
-
-
+    // const initialItems = ['One', 'Two', 'Three'];
+    // const [items, setItems] = useState(initialItems);
 
 
 
@@ -86,41 +77,40 @@ const CustomWork = () => {
     }
 
 
-
-
-
-
-
-    const [isSorted, setIsSorted] = useState(false);
-
     function handleAdd(e) {
         e.preventDefault();
-
         console.log('adding exercise:', exerciseName);
         setExerciseList([...exerciseList, exerciseName]);
         setExerciseName('');
     }
+
+    // const [isSorted, setIsSorted] = useState(false);
+
     // function handleAdd() {
     //     setItems(['New One', ...items]);
     // }
-    function handleReset() {
-        setItems(initialItems);
-    }
-    function handleRemove() {
-        const [, ...rest] = exerciseList
-        setExerciseList(rest);
-    }
+    // function handleReset() {
+    //     setItems(initialItems);
+    // }
+    // function handleRemove() {
+    //     const [, ...rest] = exerciseList
+    //     setExerciseList(rest);
+    // }
 
-    function handleSort() {
-        setIsSorted(!isSorted);
-    }
-    function sort(a, b) {
-        if (!isSorted) {
-            return 0;
-        } else {
-            return a.localeCompare(b)
-        }
-    }
+    // function handleSort() {
+    //     setIsSorted(!isSorted);
+    // }
+    // function sort(a, b) {
+    //     if (!isSorted) {
+    //         return 0;
+    //     } else {
+    //         return a.localeCompare(b)
+    //     }
+    // }
+    // function generateRandomNumber() {
+    //     return Math.floor(Math.random() * 1000 + 1);
+    // }
+    // console.log(generateRandomNumber());
 
 
 
@@ -183,12 +173,6 @@ const CustomWork = () => {
                 </div> */}
 
                 <div className='customList'>
-                    <div className='buttons'>
-                        {/* <button onClick={handleAdd}>ADD</button> */}
-                        <button onClick={handleRemove}>Remove</button>
-                        <button onClick={handleSort}>Sort</button>
-                        <button onClick={handleReset}>Reset</button>
-                    </div>
                     <AnimatePresence>
                         {[...exerciseList].map((exercise, i) => (
                             <Exercise key={exercise} exercise={exercise} index={i} 

@@ -1,28 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { motion as m, useIsPresent } from 'framer-motion';
+// import axios from 'axios';
+import { motion as m } from 'framer-motion';
 
 
 import { GiBackstab } from "react-icons/gi";
 import { GiThrownSpear } from "react-icons/gi";
-import { GiShieldBounces } from "react-icons/gi";
+// import { GiShieldBounces } from "react-icons/gi";
 
 
 
-const Exercise = ({
-    // id, exercise, getWorkoutExercises,
-    // exerciseList, setExerciseList
-    exercise, exerciseList, setExerciseList, index
-}) => {
-
-    const [editToggle, setEditToggle] = useState(false);
-    // const [exerciseEdit, setExerciseEdit] = useState(exercise.exercise);
-    const isPresent = useIsPresent();
+const Exercise = ({ exercise, exerciseList, setExerciseList, index }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-
-
-
 
     const animations = {
         // style: {
@@ -78,55 +67,33 @@ const Exercise = ({
 
 
 
-
-
-
     return (
-        <m.div {...animations} layout className='editExercise'>
+        <m.div {...animations} layout className='editExercise'
+            onMouseEnter={() => setIsOpen(!isOpen)}
+            onMouseLeave={() => setIsOpen(!isOpen)}
+        >
             <m.div
                 className='exerciseExpand'
-                onMouseEnter={() => setIsOpen(!isOpen)}
-                onMouseLeave={() => setIsOpen(!isOpen)}
                 layout
                 transition={{ layout: { duration: 1, type: 'spring' } }}
-                // style={{ borderRadius: '1rem', boxShadow: '0px 10px 30px black' }}
             >
                 <m.p className='exerciseName' layout='position' >{exercise}</m.p>
 
-                {isOpen && (
-                    <m.div 
-                        className='editOptionBar'
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}          
-                    >
-                        <button className='option' onClick={() => removeExercise(index)}><GiBackstab /></button>
-                        <button className='option' onClick={() => moveExerciseUp(index)}><GiThrownSpear /></button>
-                        <button className='option' onClick={() => moveExerciseDown(index)}><GiThrownSpear /></button>
-                    </m.div>
-                )}
             </m.div>
-
+            {isOpen && (
+                <m.div
+                    className='editOptionBar'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                >
+                    <button className='option' onClick={() => removeExercise(index)}><GiBackstab /></button>
+                    <button className='option reverse' onClick={() => moveExerciseUp(index)}><GiThrownSpear /></button>
+                    <button className='option' onClick={() => moveExerciseDown(index)}><GiThrownSpear /></button>
+                    {/* <button className='option' onClick={() => editExercise(index)}><GiShieldBounces /></button> */}
+                </m.div>
+            )}
         </m.div>
-
-
-
-
-
-
-
-        // {editToggle ?
-        //     <div className='alteringExercises'>
-        //         <div className='option' onClick={() => deleteExercise(exercise.id)}><GiBackstab /></div>
-        //         <div className='option reverse' onClick={() => moveExerciseForward(exercise.id)}><GiThrownSpear /></div>
-        //         <div className='option' onClick={() => moveExerciseBackward(exercise.id)}><GiThrownSpear /></div>
-        //         <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
-        //     </div>
-        //     :
-        //     <div className='editingExercises'>
-        //         <div className='option' onClick={() => editExercise()}><GiShieldBounces /></div>
-        //     </div>
-        // }
     )
 }
 

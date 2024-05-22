@@ -14,7 +14,7 @@ const LandingPage = ({
   const titles = [
     { path: '/spartacus', name: 'Spartacus', ability: setClassicSpartacusWorkout },
     { path: '/stopwatch', name: 'StopWatch', ability: setTitle },
-    { path: '/select', name: 'Select', ability: setTitle }
+    { path: '/select', name: 'Custom', ability: setTitle }
   ];
 
   function setClassicSpartacusWorkout() {
@@ -38,7 +38,7 @@ const LandingPage = ({
       <div className='landingLinks'>
         {titles.map((title, i) => (
           <Link to={title.path} key={i}>
-            <div onClick={() => title.ability(title.name)}>
+            <div className='landLink' onClick={() => title.ability(title.name)}>
               <p>{title.name}</p>
             </div>
           </Link>
